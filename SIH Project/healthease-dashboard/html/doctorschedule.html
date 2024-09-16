@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="./assets/img/logo.png" type="image/x-icon">
+    <title>Admin Doctor Schedule | HealthEase </title>
+    <!--Font awesome stylesheet-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- bootstrap stylesheet -->
+    <link rel="stylesheet" href="../assets/css/customizeBootstrap.css">
+    <!-- css stylesheet -->
+    <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+
+<body class="body-bg">
+
+    <!-- main body  -->
+
+    <!-- preloader  -->
+    <div id='preloader'>
+        <svg id='loader-1' height='210' width='550' xmlns='http://www.w3.org/2000/svg'
+            xmlns:xlink='http://www.w3.org/1999/xlink'>
+            <path id='loader-2' stroke='#DE6262' fill='none' stroke-width='2' stroke-linejoin='round'
+                d='M0,90L250,90Q257,60 262,87T267,95 270,88 273,92t6,35 7,-60T290,127 297,107s2,-11 10,-10 1,1 8,-10T319,95c6,4 8,-6 10,-17s2,10 9,11h210' />
+        </svg>
+    </div>
+
+
+    <!-- sidebar start -->
+    <div class="sidebar">
+        <div class="sidebar-wrapper">
+            <div>
+                <i class="fa-solid fa-x hide-menubar" id="hide-menubar"></i>
+                <div class="p-xl-20 p-10 ">
+                    <div class="logo pb-20">
+                        <a class="d-flex align-items-center" href="../dashboard.html">
+                            <img src="../assets/img/logo.png" alt="logo">
+                            <img class="ms-10 show-item lp-2" src="../assets/img/logo-body.png" alt="logo">
+                        </a>
+                    </div>
+                    <div class="py-20 bb-2 bt-1">
+                        <a class="sidebar-user" href="javascript:void(0)">
+                            <img class="rounded-circle" src="../assets/img/admin.png" alt="admin">
+                            <span class="para-1b show-item ms-10">Super Admin</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="side-menu">
+                    <ul>
+                        <li>
+                            <a href="../php/dashboard.php">
+                                <i class="fa-solid fa-gauge-high"></i>
+                                <span class="show-item">Dashboard</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="device.html">
+                                <i class="fa-solid fa-laptop-medical"></i>
+                                <span class="show-item">Device</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="doctor.html">
+                                <i class="fa-solid fa-user-doctor"></i>
+                                <span class="show-item"> Doctor</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="patient.html">
+                                <i class="fa-solid fa-bed-pulse"></i>
+                                <span class="show-item"> Patient </span>
+                            </a>
+                        </li>
+                        <li class="active">
+                            <a href="doctorschedule.html">
+                                <i class="fa-solid fa-calendar-days"></i>
+                                <span class="show-item"> Doctor Schedule</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="patientappo.html">
+                                <i class="fa-regular fa-calendar-check"></i>
+                                <span class="show-item"> Patient Appointment</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="patientcasestudies.html"><i class="fa-solid fa-paste"></i>
+                                <span class="show-item"> Patient Case Studies</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="prescription.html">
+                                <i class="fa-solid fa-file-prescription"></i>
+                                <span class="show-item">Prescription</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <button class="log-out">
+                <i class="fa-solid fa-arrow-right-from-bracket"></i>
+                <span class="show-item"> Log Out </span>
+            </button>
+        </div>
+    </div>
+    <!-- sidebar end  -->
+
+    <!-- main content & top header start  -->
+    <main class="content-wrapper">
+
+        <!-- header section start  -->
+        <header>
+            <div class="d-flex align-items-center gap-xl-30 gap-3">
+
+                <button class="toggle-menu btn">
+                    <i class="fa-solid fa-bars-staggered"></i>
+                </button>
+
+                <a href="#" target="_blank">
+                    <i class="fa-solid fa-globe me-10"></i>
+                    <span class="fs-base header-item-hide">Go to website</span>
+                </a>
+            </div>
+
+            <div class="d-flex align-items-center gap-sm-4 gap-3">
+
+                <a href="#">
+                    <i class="fa-regular fa-comments me-2"></i>
+                    <span class="fs-base header-item-hide">Chat with us</span>
+                </a>
+
+                <div class="health-ease">
+                    <i class="fa-regular fa-hospital me-xl-10 he-icon"></i>
+                    <select>
+                        <option value="0">HealthEase</option>
+                        <option value="1">item 1</option>
+                        <option value="2">item 2</option>
+                        <option value="3">item 3</option>
+                    </select>
+                </div>
+
+
+                <div class="account">
+                    <img class="me-xl-10" src="../assets/img/patient.png" alt="patient">
+                    <select>
+                        <option value="0">Mr Patient</option>
+                        <option value="1">item 1</option>
+                        <option value="2">item 2</option>
+                        <option value="3">item 3</option>
+                    </select>
+                </div>
+
+                <div class="language ">
+                    <img class="lang-flag header-item-hide" src="../assets/img/flag.png" alt="flag">
+
+                    <select class="lang">
+                        <option value="en">EN</option>
+                        <option value="bd">BD</option>
+                        <option value="in">IN</option>
+                    </select>
+                </div>
+            </div>
+        </header>
+        <!-- header section end  -->
+
+        <!-- content section start   -->
+        <div class="main-content">
+            <!-- main content start -->
+            <div>
+                <div class="page-title justify-content-end">
+                    <!-- <h3>Doctor Schedule</h3> -->
+                    <ul class="d-flex align-items-center gap-20">
+                        <li class="bc-item"><a class="para-1b" href="../dashboard.html">Dashboard</a></li>
+                        <li class="bc-item">Doctor Schedule</li>
+                    </ul>
+                </div>
+
+                <div class="list-body">
+                    <div class="list-title text-center bgnc-10 br-trl-sm px-30 py-3">
+                        <span class="heading-five tpc-2">Doctor Schedule</span>
+                    </div>
+                    <!-- table start -->
+                    <table class="list-table" id="itemTable">
+                        <thead>
+                            <tr>
+                                <th class="text-center">ID</th>
+                                <th class="sort-devices"><img class="me-10" src="../assets/img/up-down.png"
+                                        alt="up-down">Doctor Name
+                                </th>
+                                <th class="sort-devices"><img class="me-10" src="../assets/img/up-down.png"
+                                        alt="up-down">Weekday
+                                </th>
+                                <th class="sort-devices"><img class="me-10" src="../assets/img/up-down.png"
+                                        alt="up-down">Visiting Time
+                                </th>
+                                <th><img class="me-10" src="../assets/img/up-down.png" alt="up-down">Status</th>
+                                <th class="text-center"><img class="me-10" src="../assets/img/up-down.png"
+                                        alt="up-down">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="text-center">1</td>
+                                <td><a href="admin-doctor-appointment-info.html">Mr Doctor</a></td>
+                                <td>Friday</td>
+                                <td>00:00 - 23:59</td>
+                                <td class="tsc-1">Active</td>
+                                <td class="text-center"><i class="act-icon tpc-2 fa-regular fa-eye"></i></td>
+                            </tr>
+                            <tr>
+                                <td class="text-center">2</td>
+                                <td><a href="admin-doctor-appointment-info.html">Mr Doctor x </a></td>
+                                <td>Saturday</td>
+                                <td>00:00 - 23:59</td>
+                                <td class="tsc-1">Active</td>
+                                <td class="text-center"><i class="act-icon tpc-2 fa-regular fa-eye"></i></td>
+                            </tr>
+                            <tr>
+                                <td class="text-center">3</td>
+                                <td><a href="admin-doctor-appointment-info.html">Mr Doctor y</a></td>
+                                <td>Sunday</td>
+                                <td>00:00 - 23:59</td>
+                                <td class="tsc-1">Active</td>
+                                <td class="text-center"><i class="act-icon tpc-2 fa-regular fa-eye"></i></td>
+                            </tr>
+                            <tr>
+                                <td class="text-center">4</td>
+                                <td><a href="admin-doctor-appointment-info.html">Mr Doctor z </a></td>
+                                <td>Monday</td>
+                                <td>00:00 - 23:59</td>
+                                <td class="tsc-1">Active</td>
+                                <td class="text-center"><i class="act-icon tpc-2 fa-regular fa-eye"></i></td>
+                            </tr>
+                            <tr>
+                                <td class="text-center">5</td>
+                                <td><a href="admin-doctor-appointment-info.html">Mr Doctor</a></td>
+                                <td>Tuesday</td>
+                                <td>00:00 - 23:59</td>
+                                <td class="tsc-1">Active</td>
+                                <td class="text-center"><i class="act-icon tpc-2 fa-regular fa-eye"></i></td>
+                            </tr>
+                            <tr>
+                                <td class="text-center">6</td>
+                                <td><a href="admin-doctor-appointment-info.html">Mr Doctor</a></td>
+                                <td>Wednesday</td>
+                                <td>00:00 - 23:59</td>
+                                <td class="tsc-1">Active</td>
+                                <td class="text-center"><i class="act-icon tpc-2 fa-regular fa-eye"></i></td>
+                            </tr>
+                            <tr>
+                                <td class="text-center">7</td>
+                                <td><a href="admin-doctor-appointment-info.html">Mr Doctor</a></td>
+                                <td>Thursday</td>
+                                <td>00:00 - 23:59</td>
+                                <td class="tsc-1">Active</td>
+                                <td class="text-center"><i class="act-icon tpc-2 fa-regular fa-eye"></i></td>
+                            </tr>
+                            <tr>
+                                <td class="text-center">8</td>
+                                <td><a href="admin-doctor-appointment-info.html">Mr Doctor</a></td>
+                                <td>Friday</td>
+                                <td>00:00 - 23:59</td>
+                                <td class="tsc-1">Active</td>
+                                <td class="text-center"><i class="act-icon tpc-2 fa-regular fa-eye"></i></td>
+                            </tr>
+                            <tr>
+                                <td class="text-center">9</td>
+                                <td><a href="admin-doctor-appointment-info.html">Mr Doctor</a></td>
+                                <td>Saturday</td>
+                                <td>00:00 - 23:59</td>
+                                <td class="tsc-1">Active</td>
+                                <td class="text-center"><i class="act-icon tpc-2 fa-regular fa-eye"></i></td>
+                            </tr>
+                            <tr>
+                                <td class="text-center">10</td>
+                                <td><a href="admin-doctor-appointment-info.html">Mr Doctor</a></td>
+                                <td>Sunday</td>
+                                <td>00:00 - 23:59</td>
+                                <td class="tsc-1">Active</td>
+                                <td class="text-center"><i class="act-icon tpc-2 fa-regular fa-eye"></i></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <!-- table end -->
+                    <!-- pagination start  -->
+                    <div class="list-footer d-between bgnc-10 br-brl-sm px-30 py-3">
+                        <span class="para-1b fs-base d-block">Showing 1 to 10 of 14 entries</span>
+                        <ul class="pagination-item">
+                            <li class="page-item">
+                                <a class="page-link" href="javascript:void(0)" aria-label="Previous">
+                                    <span aria-hidden="true"><i class="fa-solid fa-angles-left"></i></span>
+                                </a>
+                            </li>
+                            <li class="page-item "><a class="page-link" href="javascript:void(0)">1</a></li>
+                            <li class="page-item active"><a class="page-link" href="javascript:void(0)">2</a></li>
+                            <li class="page-item"><a class="page-link" href="javascript:void(0)">3</a></li>
+                            <li class="page-item">
+                                <a class="page-link" href="javascript:void(0)" aria-label="Next">
+                                    <span aria-hidden="true"><i class="fa-solid fa-angles-right"></i></span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                    <!-- pagination end  -->
+                </div>
+
+            </div>
+            <!-- main content end -->
+
+            <!-- footer start  -->
+            <footer>
+                <div class="container-fluid">
+                    <span class="para-1b fs-base text-center text-sm-start d-block ">Copyright © <span
+                            class="currentYear"></span> HealthEase Medical. All
+                        rights reserved.</span>
+                </div>
+            </footer>
+            <!-- footer end  -->
+        </div>
+        <!-- content section end   -->
+    </main>
+    <!-- main content & top header end  -->
+
+
+    <!-- jquery -->
+    <script src="../assets/js/plugin/jquery-3.7.0.min.js"></script>
+    <!-- bootstrap js  -->
+    <script src="../assets/js/plugin/bootstrap.min.js"></script>
+    <!-- nice select  -->
+    <script src="../assets/js/plugin/jquery.nice-select.min.js"></script>
+    <!-- chart js  -->
+    <script src="../assets/js/plugin/cdn.jsdelivr.net_npm_chart.js"></script>
+    <!-- plugin customize js  -->
+    <script src="../assets/js/pluginCustomization.js"></script>
+    <!-- main js  -->
+    <script src="../assets/js/main.js"></script>
+</body>
+
+</html>
