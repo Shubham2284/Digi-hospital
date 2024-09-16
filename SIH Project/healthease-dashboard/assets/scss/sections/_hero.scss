@@ -1,0 +1,601 @@
+// dashboard page 01
+.main-content {
+    margin: 0 24px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 90vh;
+
+    @media (max-width:991px) {
+        margin: 0 16px;
+    }
+
+    .page-title {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin: 30px auto;
+        flex-wrap: wrap;
+    }
+}
+
+
+.card-box {
+    padding: 20px 30px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    border-radius: 10px;
+    background: var(--neutral-10);
+
+    h5{
+        font-size: 18px;
+
+    }
+    @media (max-width:1700px) {
+        padding: 10px;
+        h5{
+            font-size: 16px;
+        }
+    }
+    &:hover>.card-box-icon>img {
+        transform: rotateY(-180deg);
+    }
+
+    .card-box-icon {
+        display: flex;
+        width: 71px;
+        height: 71px;
+        padding: 8px;
+        justify-content: center;
+        align-items: center;
+        border-radius: 5px;
+
+
+        @media (max-width:1700px) {
+            width: 50px;
+            height: 50px;
+        }
+
+        img {
+            transition: .5s ease-in-out;
+        }
+    }
+}
+
+.monthly-user {
+    max-height: 425px;
+    padding: 30px 40px;
+    height: 100%;
+
+    @media (max-width:1399px) {
+        padding-left: 0;
+    }
+
+    @media (max-width:1199px) {
+        padding: 15px;
+        padding-left: 0;
+    }
+
+    @media (max-width: 575px) {
+        max-height: 330px;
+    }
+
+    #monthlyUserChart {
+        width: 100% !important;
+        height: 95% !important;
+    }
+}
+
+//tab-btn
+.tab-btn {
+    display: flex;
+    align-items: center;
+    padding: 5px;
+    border: 1px solid var(--neutral-07);
+    border-radius: 5px;
+
+    li {
+        button {
+            padding: 7px 14px;
+            border-radius: 5px;
+
+            @media (max-width: 575px) {
+                padding: 5px;
+            }
+        }
+
+        .active {
+            color: var(--neutral-10);
+            background: var(--primary-color-02);
+        }
+    }
+}
+
+.earning-icon {
+    max-width: 85px;
+    max-height: 80px;
+    width: 100%;
+    height: 100%;
+    margin: auto;
+}
+
+.report-chart {
+    max-width: 190px;
+    width: 100%;
+
+    .earning-report {
+        width: 100px !important;
+        height: 100px !important;
+        margin: auto;
+    }
+}
+
+.chart-br {
+    position: relative;
+
+    &::before {
+        content: '';
+        position: absolute;
+        top: 40%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 1px;
+        height: 50%;
+        background: var(--neutral-07);
+    }
+}
+
+.patient-report-chart {
+    max-width: 130px;
+    width: 100%;
+
+    .earning-report {
+        width: 70px !important;
+        height: 70px !important;
+        margin: auto;
+    }
+}
+
+
+// dashboard page 02
+.list-body,
+.prescription-table {
+    @media (max-width:1600px) {
+        overflow-x: scroll;
+        width: 100%;
+
+        &::-webkit-scrollbar {
+            background: var(--primary-color-02);
+            width: 5px;
+            height: 5px;
+        }
+
+        &::-webkit-scrollbar-thumb {
+            background: var(--primary-color);
+        }
+    }
+
+    .list-title,
+    .list-table,
+    .list-footer,
+    .filter-list,
+    .diagnosis-table,
+    .medicine-table {
+        @media (max-width:1600px) {
+            overflow: scroll;
+            min-width: 1200px;
+        }
+    }
+
+    .list-title,
+    .list-footer {
+        &::-webkit-scrollbar {
+            display: none;
+        }
+    }
+}
+
+
+// device control switcher button 
+.switch {
+    font-size: 17px;
+    position: relative;
+    display: inline-block;
+    width: 45px;
+    height: 20px;
+
+    input {
+        opacity: 0;
+        width: 0;
+        height: 0;
+
+        &:checked+.slider:before {
+            transform: translateX(1.6em);
+            background: var(--secondary-color);
+        }
+    }
+
+    .slider {
+        position: absolute;
+        cursor: pointer;
+        inset: 0;
+        background: var(--bg-color-05);
+        border-radius: 50px;
+        transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+
+        &:before {
+            position: absolute;
+            content: "";
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 20px;
+            width: 20px;
+            inset: 0;
+            background-color: var(--primary-color-02);
+            border-radius: 50px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+    }
+}
+
+
+.filter-list {
+    display: none;
+    border-top: 1px solid var(--neutral-07);
+    input{
+        &::placeholder{
+            color: var(--neutral-05);
+        }
+    }
+}
+
+// doctor info 
+.social-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+
+    li {
+        width: 30px;
+        height: 30px;
+        border-radius: 3.125px;
+        border: 0.625px solid var(--neutral-06);
+        background: var(--white);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        a {
+            color: var(--primary-color-02);
+        }
+    }
+}
+
+.doc-info-body {
+    display: flex;
+    justify-content: space-between;
+    gap: 60px;
+    position: relative;
+
+    @media (max-width:1500px) {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    @media (min-width:1501px) {
+        &::before {
+            content: '';
+            position: absolute;
+            top: 0%;
+            left: 50%;
+            transform: translate(-50%, 5%);
+            width: 1px;
+            height: 95%;
+            background: var(--neutral-07);
+        }
+    }
+
+    .doc-info-item {
+        width: 50%;
+
+        @media (max-width:1500px) {
+            width: 100%;
+        }
+
+        .doc-info-title {
+            width: 110px;
+            display: block;
+        }
+    }
+}
+
+
+// patient problem list
+.patient-problem-list{
+    .nice-select{
+        height: 32px;
+        line-height: 30px;
+        font-size: 16px;
+
+        &::after{
+            height: 8px;
+            width: 8px;
+            right: 12px;
+        }
+    }
+}
+
+// medicine and diagnosis form
+.medicine-form, .diagnosis-form{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    @media (max-width:575px) {
+        flex-direction: column;
+        margin-bottom: 20px;
+    }
+
+    .medi-input-box{
+        flex: 1;
+        &:last-child{
+            flex: 0.7;
+            @media (max-width:1700px) {
+                flex: 1;
+            }
+            .medicine-input{
+                padding: 11px 30px;
+                i{
+                    cursor: pointer;
+                }
+            }
+        }
+
+        @media (max-width: 575px) {
+            width: 100%;
+        }
+
+        .medicine-label{
+            border-radius: 5px;
+            background: var(--primary-color-02);
+            color: var(--neutral-10);
+            padding: 15px 30px;
+            margin-bottom: 20px;
+            white-space: nowrap;
+
+            @media (max-width:575px) {
+                padding: 10px;
+                margin-bottom: 10px;
+            }
+        }
+        .medicine-input{
+            border-radius: 5px;
+            border: 1px solid var(--neutral-07);
+            background: var(--neutral-10);
+            padding: 15px 30px;
+            margin-bottom: 30px;
+            @media (max-width:575px) {
+                padding: 10px;
+                margin-bottom: 10px;
+            }
+            
+            input{
+                border: none;
+                outline: none;
+            }
+        }
+    }
+}
+
+.diagnosis-form{
+    .medi-input-box{
+        .medicine-label{
+            background: var(--table-color);
+            color: var(--neutral-02);
+            border: 1px solid var(--neutral-06);
+        }
+    }
+}
+
+
+
+
+// chat box styles
+.user-avatar {
+    width: 60px;
+    height: 60px;
+
+    @media (max-width:1199px) {
+        width: 45px;
+        height: 45px;
+    }
+}
+
+.msg-list {
+    @media (max-width: 991px) {
+        position: absolute;
+        z-index: 10;
+        box-shadow: var(--shadow-one);
+        left: -100%;
+        top: 55px;
+        transition: .5s ease-in-out;
+        width: 300px;
+    }
+
+    @media (max-width:420px) {
+        width: 100%;
+    }
+}
+
+.msg-notification {
+    max-height: 70vh;
+    overflow-y: auto;
+    overflow-x: hidden;
+
+    &::-webkit-scrollbar {
+        display: none;
+    }
+
+    .msg-label {
+        position: absolute;
+        bottom: 30px;
+        right: 0;
+        z-index: 10;
+
+        .time-badge {
+            display: flex;
+            width: 15px;
+            height: 15px;
+            justify-content: center;
+            align-items: center;
+            border-radius: 8px;
+            background: var(--primary-color-02);
+            color: var(--neutral-10);
+            font-size: 12px;
+        }
+    }
+}
+
+.sender-profile {
+    display: flex;
+    padding: 15px 30px 30px;
+    align-items: center;
+    justify-content: space-between;
+    background: var(--table-color);
+    border-radius: 10px 10px 0 0;
+
+    @media (max-width:575px) {
+        padding: 15px;
+    }
+
+    .sender-avatar {
+        width: 60px;
+        height: 60px;
+
+        @media (max-width:575px) {
+            width: 45px;
+            height: 45px;
+        }
+    }
+
+}
+
+
+
+.chat-box {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 100%;
+    max-height: 70vh;
+    overflow-y: auto;
+    background: var(--neutral-10);
+    flex: 1;
+
+    &::-webkit-scrollbar {
+        display: none;
+    }
+
+    .sender-msg,
+    .receiver-msg {
+        padding: 15px 30px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        @media (max-width:575px) {
+            padding: 15px;
+        }
+    }
+
+    .receiver-msg {
+        flex-direction: row-reverse;
+    }
+
+    .chat-avatar {
+        width: 50px;
+        height: 50px;
+
+        @media (max-width:1199px) {
+            width: 40px;
+            height: 40px;
+        }
+    }
+
+    .sender-text {
+        margin-top: 15px;
+        position: relative;
+        padding: 10px 20px;
+        background: var(--bg-color-linear-02);
+        border-radius: 3px;
+
+        &::after {
+            content: '';
+            position: absolute;
+            top: -10px;
+            left: 18px;
+            border-left: 10px solid transparent;
+            border-right: 10px solid transparent;
+            border-bottom: 10px solid var(--bg-color-linear-02);
+        }
+    }
+
+    .receiver-text {
+        margin-bottom: 15px;
+        position: relative;
+        padding: 10px 20px;
+        background: var(--table-color);
+        border-radius: 3px;
+        margin-left: auto;
+
+        &::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            right: 18px;
+            border-left: 10px solid transparent;
+            border-right: 10px solid transparent;
+            border-top: 10px solid var(--table-color);
+        }
+    }
+}
+
+.chat-box-option {
+    display: flex;
+    padding: 30px;
+    align-items: center;
+    gap: 22px;
+    align-self: stretch;
+    border-radius: 10px;
+    background: var(--white);
+    box-shadow: var(--shadow-one);
+    margin-top: -5px;
+
+    @media (max-width:575px) {
+        padding: 15px;
+        gap: 10px;
+    }
+
+    .chat-input-box {
+        width: 100%;
+
+        input {
+            width: 100%;
+            padding: 15px 30px;
+            border-radius: 5px;
+            border: 1px solid var(--neutral-06);
+            outline: none;
+
+            @media (max-width:575px) {
+                padding: 10px 15px;
+            }
+        }
+    }
+
+}
