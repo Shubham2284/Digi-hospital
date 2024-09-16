@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="../assets/img/logo.png" type="image/x-icon">
+    <title>Admin Patient | HealthEase </title>
+    <!--Font awesome stylesheet-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+        integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- bootstrap stylesheet -->
+    <link rel="stylesheet" href="../assets/css/customizeBootstrap.css">
+    <!-- css stylesheet -->
+    <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+
+<body class="body-bg">
+
+    <!-- main body  -->
+
+    <!-- preloader  -->
+    <div id='preloader'>
+        <svg id='loader-1' height='210' width='550' xmlns='http://www.w3.org/2000/svg'
+            xmlns:xlink='http://www.w3.org/1999/xlink'>
+            <path id='loader-2' stroke='#DE6262' fill='none' stroke-width='2' stroke-linejoin='round'
+                d='M0,90L250,90Q257,60 262,87T267,95 270,88 273,92t6,35 7,-60T290,127 297,107s2,-11 10,-10 1,1 8,-10T319,95c6,4 8,-6 10,-17s2,10 9,11h210' />
+        </svg>
+    </div>
+
+    <!-- sidebar start -->
+    <div class="sidebar">
+        <div class="sidebar-wrapper">
+            <div>
+                <i class="fa-solid fa-x hide-menubar" id="hide-menubar"></i>
+                <div class="p-xl-20 p-10 ">
+                    <div class="logo pb-20">
+                        <a class="d-flex align-items-center" href="doctordash.php">
+                            <img src="../assets/img/logo.png" alt="logo">
+                            <img class="ms-10 show-item lp-2" src="../assets/img/logo-body.png" alt="logo">
+                        </a>
+                    </div>
+                    <div class="py-20 bb-2 bt-1">
+                        <a class="sidebar-user" href="javascript:void(0)">
+                            <img class="rounded-circle" src="../assets/img/doctor.png" alt="admin">
+                            <span class="para-1b show-item ms-10">Mr. Doctor</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="side-menu">
+                    <ul>
+                        <li>
+                            <a href="receptiondash.php">
+                                <i class="fa-solid fa-gauge-high"></i>
+                                <span class="show-item">Dashboard</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="device.html">
+                                <i class="fa-solid fa-laptop-medical"></i>
+                                <span class="show-item">Device</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="doctor.html">
+                                <i class="fa-solid fa-laptop-medical"></i>
+                                <span class="show-item">Doctors</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="patient.html">
+                                <i class="fa-solid fa-bed-pulse"></i>
+                                <span class="show-item"> Patient </span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="addpatient.html">
+                                <i class="fa-solid fa-bed-pulse"></i>
+                                <span class="show-item">Add-Patient</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="editpatient.html">
+                                <i class="fa-solid fa-bed-pulse"></i>
+                                <span class="show-item">Edit-Patient</span>
+                            </a>
+                        </li>
+                        <li class="active">
+                            <a href="#">
+                                <i class="fa-solid fa-file-prescription"></i>
+                                <span class="show-item">Discharge-Patient</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- sidebar end  -->
+
+    <!-- main content & top header start  -->
+    <main class="content-wrapper">
+
+        <!-- header section start  -->
+        <header>
+            <div class="d-flex align-items-center gap-xl-30 gap-3">
+
+                <button class="toggle-menu btn">
+                    <i class="fa-solid fa-bars-staggered"></i>
+                </button>
+
+                <a href="#" target="_blank">
+                    <i class="fa-solid fa-globe me-10"></i>
+                    <span class="fs-base header-item-hide">Go to website</span>
+                </a>
+            </div>
+
+            <div class="d-flex align-items-center gap-sm-4 gap-3">
+
+                <div class="health-ease">
+                    <i class="fa-regular fa-hospital me-xl-10 he-icon"></i>
+                    E-Hospital
+                </div>
+
+
+                <div class="account">
+                    <img class="me-xl-10" src="../assets/img/patient.png" alt="patient">
+                    Reception
+                </div>
+
+                <div class="language ">
+                    <img class="lang-flag header-item-hide" src="../assets/img/flag.png" alt="flag">
+                    IN
+                </div>
+            </div>
+        </header>
+        <!-- header section end  -->
+
+        <!-- content section start   -->
+        <div class="main-content">
+            <!-- main content start -->
+            <div>
+                <div class="page-title">
+                    <ul class="d-flex align-items-center gap-20">
+                        <li class="bc-item"><a class="para-1b" href="doctordash.php">Dashboard</a></li>
+                        <li class="bc-item">Discharge Patient</li>
+                    </ul>
+                </div>
+
+                <div class="list-body">
+                    <div class="list-title d-between bgnc-10 br-trl-sm px-30 py-3">
+                        <span class="heading-five">Patient List</span>
+                        <div class="d-between gap-30">
+                            <button class="btn-1 para-1b"> <i class="fa-solid fa-cloud-arrow-down"></i> Export</button>
+                            <button class="btn-1 para-1b" id="showFilter"> <i class="fa-solid fa-sliders"></i>
+                                Discharge</button>
+                        </div>
+                    </div>
+                    <!-- pop up filter box start -->
+                    <div class="filter-list bgnc-10 ">
+                        <div class="px-30 pt-3 pb-30">
+                            <form action="#" class="d-between gap-30 mb-30">
+                                <div class="w-100">
+                                    <label class="para-1b d-block tnc-1 mb-10">Name</label>
+                                    <input class="form-control px-xxl-30 py-xxl-20 p-lg-20 p-3" type="text"
+                                        placeholder="Your name">
+                                </div>
+                                <div class="w-100">
+                                    <label class="para-1b d-block tnc-1 mb-10">Email</label>
+                                    <input class="form-control px-xxl-30 py-xxl-20 p-lg-20 p-3" type="email"
+                                        placeholder="Your email">
+                                </div>
+                                <div class="w-100">
+                                    <label class="para-1b d-block tnc-1 mb-10">Phone</label>
+                                    <input class="form-control px-xxl-30 py-xxl-20 p-lg-20 p-3" type="number"
+                                        placeholder="Your number">
+                                </div>
+                            </form>
+                            <button class="btn-2">Remove</button>
+                        </div>
+                    </div>
+                    <!-- pop up filter box end -->
+                    <!-- table start -->
+                    <table class="list-table" id="itemTable">
+                        <thead>
+                            <tr>
+                                <th class="text-center">ID</th>
+                                <th class="sort-devices"><img class="me-10" src="../assets/img/up-down.png"
+                                        alt="up-down">
+                                    Name
+                                </th>
+                                <th class="sort-devices"><img class="me-10" src="../assets/img/up-down.png"
+                                        alt="up-down">Email
+                                </th>
+                                <th class="sort-devices"><img class="me-10" src="../assets/img/up-down.png"
+                                        alt="up-down">Phone
+                                </th>
+                                <th><img class="me-10" src="../assets/img/up-down.png" alt="up-down">Status</th>
+                                <th><img class="me-10" src="../assets/img/up-down.png" alt="up-down">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="text-center">1</td>
+                                <td><a href="admin-patient-info.html">Mr Patient</a></td>
+                                <td><a href="/cdn-cgi/l/email-protection" class="__cf_email__"
+                                        data-cfemail="f989988d909c978db998949b908d90968c8a908dd79a9694">[email&#160;protected]</a>
+                                </td>
+                                <td>(406) 555-0120</td>
+                                <td class="tsc-1">Active</td>
+                                <td class="p-10">
+                                    <span class="d-center gap-3">
+                                        <i class="act-icon tpc-2 fa-regular fa-eye icon-bg"></i>
+                                        <a href="editpatient.html"> <i
+                                                class="edit-icon tpc-2 fa-solid fa-pen-to-square icon-bg"></i></a>
+                                        <i class="delete-icon tpc-2 fa-solid fa-trash-can icon-bg"></i>
+                                    </span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="text-center">2</td>
+                                <td><a href="admin-patient-info.html">Mr Patient x </a></td>
+                                <td><a href="/cdn-cgi/l/email-protection" class="__cf_email__"
+                                        data-cfemail="9feffeebf6faf1ebdffef2fdf6ebf6f0eaecf6ebb1fcf0f2">[email&#160;protected]</a>
+                                </td>
+                                <td>(406) 555-0121</td>
+                                <td class="tsc-1">Active</td>
+                                <td class="p-10">
+                                    <span class="d-center gap-3">
+                                        <i class="act-icon tpc-2 fa-regular fa-eye icon-bg icon-bgc-2"></i>
+                                        <a href="editpatient.html"> <i
+                                                class="edit-icon tpc-2 fa-solid fa-pen-to-square icon-bg icon-bgc-2"></i></a>
+                                        <i class="delete-icon tpc-2 fa-solid fa-trash-can icon-bg icon-bgc-2"></i>
+                                    </span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="text-center">3</td>
+                                <td><a href="admin-patient-info.html">Garad</a></td>
+                                <td><a href="/cdn-cgi/l/email-protection" class="__cf_email__"
+                                        data-cfemail="423223362b272c3602232f202b362b2d37312b366c212d2f">[email&#160;protected]</a>
+                                </td>
+                                <td>(406) 555-0122</td>
+                                <td class="tsc-1">Active</td>
+                                <td class="p-10">
+                                    <span class="d-center gap-3">
+                                        <i class="act-icon tpc-2 fa-regular fa-eye icon-bg"></i>
+                                        <a href="editpatient.html"> <i
+                                                class="edit-icon tpc-2 fa-solid fa-pen-to-square icon-bg"></i></a>
+                                        <i class="delete-icon tpc-2 fa-solid fa-trash-can icon-bg"></i>
+                                    </span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="text-center">4</td>
+                                <td><a href="admin-patient-info.html">Mr Patient z </a></td>
+                                <td><a href="/cdn-cgi/l/email-protection" class="__cf_email__"
+                                        data-cfemail="f080918499959e84b0919d929984999f85839984de939f9d">[email&#160;protected]</a>
+                                </td>
+                                <td>(406) 555-0123</td>
+                                <td class="tsc-1">Active</td>
+                                <td class="p-10">
+                                    <span class="d-center gap-3">
+                                        <i class="act-icon tpc-2 fa-regular fa-eye icon-bg icon-bgc-2"></i>
+                                        <a href="editpatient.html"> <i
+                                                class="edit-icon tpc-2 fa-solid fa-pen-to-square icon-bg icon-bgc-2"></i></a>
+                                        <i class="delete-icon tpc-2 fa-solid fa-trash-can icon-bg icon-bgc-2"></i>
+                                    </span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="text-center">5</td>
+                                <td><a href="admin-patient-info.html">Mr Patient</a></td>
+                                <td><a href="/cdn-cgi/l/email-protection" class="__cf_email__"
+                                        data-cfemail="bbcbdacfd2ded5cffbdad6d9d2cfd2d4cec8d2cf95d8d4d6">[email&#160;protected]</a>
+                                </td>
+                                <td>(406) 555-0124</td>
+                                <td class="tsc-1">Active</td>
+                                <td class="p-10">
+                                    <span class="d-center gap-3">
+                                        <i class="act-icon tpc-2 fa-regular fa-eye icon-bg"></i>
+                                        <a href="editpatient.html"> <i
+                                                class="edit-icon tpc-2 fa-solid fa-pen-to-square icon-bg"></i></a>
+                                        <i class="delete-icon tpc-2 fa-solid fa-trash-can icon-bg"></i>
+                                    </span>
+                                </td>
+                            </tr>
+                            <tr class="p-10">
+                                <td class="text-center">6</td>
+                                <td><a href="admin-patient-info.html">Mr Patient</a></td>
+                                <td><a href="/cdn-cgi/l/email-protection" class="__cf_email__"
+                                        data-cfemail="6a1a0b1e030f041e2a0b0708031e03051f19031e44090507">[email&#160;protected]</a>
+                                </td>
+                                <td>(406) 555-0125</td>
+                                <td class="tsc-1">Active</td>
+                                <td class="p-10">
+                                    <span class="d-center gap-3">
+                                        <i class="act-icon tpc-2 fa-regular fa-eye icon-bg icon-bgc-2"></i>
+                                        <a href="editpatient.html"> <i
+                                                class="edit-icon tpc-2 fa-solid fa-pen-to-square icon-bg icon-bgc-2"></i></a>
+                                        <i class="delete-icon tpc-2 fa-solid fa-trash-can icon-bg icon-bgc-2"></i>
+                                    </span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="text-center">7</td>
+                                <td><a href="admin-patient-info.html">Mr Patient</a></td>
+                                <td><a href="/cdn-cgi/l/email-protection" class="__cf_email__"
+                                        data-cfemail="8dfdecf9e4e8e3f9cdece0efe4f9e4e2f8fee4f9a3eee2e0">[email&#160;protected]</a>
+                                </td>
+                                <td>(406) 555-0126</td>
+                                <td class="tsc-1">Active</td>
+                                <td class="p-10">
+                                    <span class="d-center gap-3">
+                                        <i class="act-icon tpc-2 fa-regular fa-eye icon-bg"></i>
+                                        <a href="editpatient.html"> <i
+                                                class="edit-icon tpc-2 fa-solid fa-pen-to-square icon-bg"></i></a>
+                                        <i class="delete-icon tpc-2 fa-solid fa-trash-can icon-bg"></i>
+                                    </span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="text-center">8</td>
+                                <td><a href="admin-patient-info.html">Mr Patient</a></td>
+                                <td><a href="/cdn-cgi/l/email-protection" class="__cf_email__"
+                                        data-cfemail="ea9a8b9e838f849eaa8b8788839e83859f99839ec4898587">[email&#160;protected]</a>
+                                </td>
+                                <td>(406) 555-0127</td>
+                                <td class="tsc-1">Active</td>
+                                <td class="p-10">
+                                    <span class="d-center gap-3">
+                                        <i class="act-icon tpc-2 fa-regular fa-eye icon-bg icon-bgc-2"></i>
+                                        <a href="editpatient.html"> <i
+                                                class="edit-icon tpc-2 fa-solid fa-pen-to-square icon-bg icon-bgc-2"></i></a>
+                                        <i class="delete-icon tpc-2 fa-solid fa-trash-can icon-bg icon-bgc-2"></i>
+                                    </span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="text-center">9</td>
+                                <td><a href="admin-patient-info.html">Mr Patient</a></td>
+                                <td><a href="/cdn-cgi/l/email-protection" class="__cf_email__"
+                                        data-cfemail="ef9f8e9b868a819baf8e828d869b86809a9c869bc18c8082">[email&#160;protected]</a>
+                                </td>
+                                <td>(406) 555-0128</td>
+                                <td class="tsc-1">Active</td>
+                                <td class="p-10">
+                                    <span class="d-center gap-3">
+                                        <i class="act-icon tpc-2 fa-regular fa-eye icon-bg"></i>
+                                        <a href="editpatient.html"> <i
+                                                class="edit-icon tpc-2 fa-solid fa-pen-to-square icon-bg"></i></a>
+                                        <i class="delete-icon tpc-2 fa-solid fa-trash-can icon-bg"></i>
+                                    </span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="text-center">10</td>
+                                <td><a href="admin-patient-info.html">Mr Patient</a></td>
+                                <td><a href="/cdn-cgi/l/email-protection" class="__cf_email__"
+                                        data-cfemail="562637223f33382216373b343f223f3923253f227835393b">[email&#160;protected]</a>
+                                </td>
+                                <td>(406) 555-0129</td>
+                                <td class="tsc-1">Active</td>
+                                <td class="p-10">
+                                    <span class="d-center gap-3">
+                                        <i class="act-icon tpc-2 fa-regular fa-eye icon-bg icon-bgc-2"></i>
+                                        <a href="editpatient.html"> <i
+                                                class="edit-icon tpc-2 fa-solid fa-pen-to-square icon-bg icon-bgc-2"></i></a>
+                                        <i class="delete-icon tpc-2 fa-solid fa-trash-can icon-bg icon-bgc-2"></i>
+                                    </span>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <!-- table end -->
+                    <!-- pagination start  -->
+                    <div class="list-footer d-between bgnc-10 br-brl-sm px-30 py-3">
+                        <span class="para-1b fs-base d-block">Showing 1 to 10 of 14 entries</span>
+                        <ul class="pagination-item">
+                            <li class="page-item">
+                                <a class="page-link" href="javascript:void(0)" aria-label="Previous">
+                                    <span aria-hidden="true"><i class="fa-solid fa-angles-left"></i></span>
+                                </a>
+                            </li>
+                            <li class="page-item "><a class="page-link" href="javascript:void(0)">1</a></li>
+                            <li class="page-item active"><a class="page-link" href="javascript:void(0)">2</a></li>
+                            <li class="page-item"><a class="page-link" href="javascript:void(0)">3</a></li>
+                            <li class="page-item">
+                                <a class="page-link" href="javascript:void(0)" aria-label="Next">
+                                    <span aria-hidden="true"><i class="fa-solid fa-angles-right"></i></span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                    <!-- pagination end  -->
+                </div>
+
+            </div>
+            <!-- main content end -->
+
+            <!-- footer start  -->
+            <footer>
+                <div class="container-fluid">
+                    <span class="para-1b fs-base text-center text-sm-start d-block ">Copyright © <span
+                            class="currentYear"></span> HealthEase Medical. All
+                        rights reserved.</span>
+                </div>
+            </footer>
+            <!-- footer end  -->
+        </div>
+        <!-- content section end   -->
+    </main>
+    <!-- main content & top header end  -->
+
+
+    <!-- jquery -->
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
+    <!-- jquery -->
+    <script src="../assets/js/plugin/jquery-3.7.0.min.js"></script>
+    <!-- bootstrap js  -->
+    <script src="../assets/js/plugin/bootstrap.min.js"></script>
+    <!-- nice select  -->
+    <script src="../assets/js/plugin/jquery.nice-select.min.js"></script>
+    <!-- chart js  -->
+    <script src="../assets/js/plugin/cdn.jsdelivr.net_npm_chart.js"></script>
+    <!-- plugin customize js  -->
+    <script src="../assets/js/pluginCustomization.js"></script>
+    <!-- main js  -->
+    <script src="../assets/js/main.js"></script>
+</body>
+
+</html>
