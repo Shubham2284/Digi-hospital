@@ -1,0 +1,27 @@
+{
+    "tenders": [
+        {
+            "title": "Tender for Supply of Medical Equipment",
+            "description": "Supply of advanced medical equipment to hospitals in Delhi.",
+            "date": "20-Aug-2024"
+            
+        },
+        {
+            "title": "Tender for Hospital Renovation",
+            "description": "Renovation of multiple hospitals in various districts of Delhi.",
+            "date": "05-Aug-2024"
+        },
+        {
+            "title": "Tender for Medicine Supply",
+            "description": "Supply of essential medicines to public hospitals across Delhi.",
+            "date": "25-Jul-2024"
+            
+        },
+        {
+            "title": "Tender for Medicine Supply",
+            "description": "Supply of essential medicines to public hospitals across Delhi.",
+            "date": "25-Jul-2024"
+            
+        }
+    ]
+}
