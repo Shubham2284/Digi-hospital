@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="./assets/img/logo.png" type="image/x-icon">
+    <title>Admin Edit Patient | HealthEase </title>
+    <!-- bootstrap stylesheet -->
+    <link rel="stylesheet" href="../assets/css/customizeBootstrap.css">
+    <!-- css stylesheet -->
+    <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+
+<body class="body-bg">
+
+    <!-- main body  -->
+
+    <!-- preloader  -->
+    <div id='preloader'>
+        <svg id='loader-1' height='210' width='550' xmlns='http://www.w3.org/2000/svg'
+            xmlns:xlink='http://www.w3.org/1999/xlink'>
+            <path id='loader-2' stroke='#DE6262' fill='none' stroke-width='2' stroke-linejoin='round'
+                d='M0,90L250,90Q257,60 262,87T267,95 270,88 273,92t6,35 7,-60T290,127 297,107s2,-11 10,-10 1,1 8,-10T319,95c6,4 8,-6 10,-17s2,10 9,11h210' />
+        </svg>
+    </div>
+
+    <!-- sidebar start -->
+    <div class="sidebar">
+        <div class="sidebar-wrapper">
+            <div>
+                <i class="fa-solid fa-x hide-menubar" id="hide-menubar"></i>
+                <div class="p-xl-20 p-10 ">
+                    <div class="logo pb-20">
+                        <a class="d-flex align-items-center" href="index.html">
+                            <img src="assets/img/logo.png" alt="logo">
+                            <img class="ms-10 show-item lp-2" src="assets/img/logo-body.png" alt="logo">
+                        </a>
+                    </div>
+                    <div class="py-20 bb-2 bt-1">
+                        <a class="sidebar-user" href="javascript:void(0)">
+                            <img class="rounded-circle" src="assets/img/admin.png" alt="admin">
+                            <span class="para-1b show-item ms-10">Super Admin</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="side-menu">
+                    <ul>
+                        <li>
+                            <a href="../php/dashboard.php">
+                                <i class="fa-solid fa-gauge-high"></i>
+                                <span class="show-item">Dashboard</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="admin-device.html">
+                                <i class="fa-solid fa-laptop-medical"></i>
+                                <span class="show-item">Device</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="admin-doctor.html">
+                                <i class="fa-solid fa-user-doctor"></i>
+                                <span class="show-item"> Doctor</span>
+                            </a>
+                        </li>
+                        <li class="active">
+                            <a href="admin-patient-list.html">
+                                <i class="fa-solid fa-bed-pulse"></i>
+                                <span class="show-item"> Patient </span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="admin-doctor-schedule.html">
+                                <i class="fa-solid fa-calendar-days"></i>
+                                <span class="show-item"> Doctor Schedule</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="admin-patient-appointment.html">
+                                <i class="fa-regular fa-calendar-check"></i>
+                                <span class="show-item"> Patient Appointment</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="admin-patient-case-studies.html">
+                                <i class="fa-solid fa-paste"></i>
+                                <span class="show-item"> Patient Case Studies</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="admin-patient-prescription.html">
+                                <i class="fa-solid fa-file-prescription"></i>
+                                <span class="show-item">Prescription</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <button class="log-out">
+                <i class="fa-solid fa-arrow-right-from-bracket"></i>
+                <span class="show-item"> Log Out </span>
+            </button>
+        </div>
+    </div>
+    <!-- sidebar end  -->
+
+    <!-- main content & top header start  -->
+    <main class="content-wrapper">
+
+        <!-- header section start  -->
+        <header>
+            <div class="d-flex align-items-center gap-xl-30 gap-3">
+
+                <button class="toggle-menu btn">
+                    <i class="fa-solid fa-bars-staggered"></i>
+                </button>
+
+                <a href="https://health-ease-gamma.vercel.app/" target="_blank">
+                    <i class="fa-solid fa-globe me-10"></i>
+                    <span class="fs-base header-item-hide">Go to website</span>
+                </a>
+            </div>
+
+            <div class="d-flex align-items-center gap-sm-4 gap-3">
+
+                <a href="chat-with-us.html">
+                    <i class="fa-regular fa-comments me-2"></i>
+                    <span class="fs-base header-item-hide">Chat with us</span>
+                </a>
+
+                <div class="health-ease">
+                    <i class="fa-regular fa-hospital me-xl-10 he-icon"></i>
+                    <select>
+                        <option value="0">HealthEase</option>
+                        <option value="1">item 1</option>
+                        <option value="2">item 2</option>
+                        <option value="3">item 3</option>
+                    </select>
+                </div>
+
+
+                <div class="account">
+                    <img class="me-xl-10" src="assets/img/patient.png" alt="patient">
+                    <select>
+                        <option value="0">Mr Patient</option>
+                        <option value="1">item 1</option>
+                        <option value="2">item 2</option>
+                        <option value="3">item 3</option>
+                    </select>
+                </div>
+
+                <div class="language ">
+                    <img class="lang-flag header-item-hide" src="assets/img/flag.png" alt="flag">
+
+                    <select class="lang">
+                        <option value="en">EN</option>
+                        <option value="bd">BD</option>
+                        <option value="in">IN</option>
+                    </select>
+                </div>
+            </div>
+        </header>
+        <!-- header section end  -->
+
+        <!-- content section start   -->
+        <div class="main-content">
+            <!-- main content start -->
+            <div>
+                <div class="page-title justify-content-end">
+                    <!-- <h3>Edit Patient</h3> -->
+                    <ul class="d-flex align-items-center gap-20">
+                        <li class="bc-item"><a class="para-1b" href="index.html">Dashboard</a></li>
+                        <li class="bc-item"><a class="para-1b" href="admin-patient-list.html">Patient</a></li>
+                        <li class="bc-item">Edit Patient</li>
+                    </ul>
+                </div>
+
+                <div class="bgnc-10 br-sm p-sm-30 p-10">
+                    <span class="heading-five mb-sm-30 mb-3">Edit Patient</span>
+                    <form action="#">
+                        <div class="row gy-20">
+                            <div class="col-lg-6">
+
+                                <div class="mb-20">
+                                    <label class="mb-10 fw-semibold">Name <span class="tsc-1">*</span></label>
+                                    <div class="form-input-box">
+                                        <i class="fa-solid fa-user-nurse form-icon"></i>
+                                        <input type="text" placeholder="Name" required>
+                                    </div>
+                                </div>
+
+                                <div class="mb-20">
+                                    <label class="mb-10 fw-semibold">Password <span class="tsc-1">*</span></label>
+                                    <div class="form-input-box">
+                                        <i class="fa-solid fa-key form-icon"></i>
+                                        <input type="password" placeholder="************" required>
+                                    </div>
+                                </div>
+                                <div class="mb-20">
+                                    <label class="mb-10 fw-semibold">Gender</label>
+                                    <div class="form-input-box">
+                                        <i class="fa-solid fa-restroom form-icon"></i>
+                                        <select id="gender" class="wide">
+                                            <option value="0">Select</option>
+                                            <option value="male">Male</option>
+                                            <option value="female">Female</option>
+                                            <option value="other">Other</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="mb-20">
+                                    <label class="mb-10 fw-semibold">Photo</label>
+                                    <div class="file-input">
+                                        <i class="fa-solid fa-cloud-arrow-up tnc-4 d-block"></i>
+                                        <span class="d-block fs-base tnc-4 mt-1" id="showSelectedFile">Drag and drop a
+                                            file here
+                                            or click</span>
+                                        <input type="file" id="getFile" class="visually-hidden">
+                                    </div>
+                                </div>
+                                <div>
+                                    <label class="mb-10 fw-semibold">Date of Birth</label>
+                                    <div class="form-input-box">
+                                        <i class="fa-regular fa-calendar-days form-icon"></i>
+                                        <input type="date">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-6">
+                                <div class="mb-20">
+                                    <label class="mb-10 fw-semibold">Email <span class="tsc-1">*</span></label>
+                                    <div class="form-input-box">
+                                        <i class="fa-regular fa-envelope form-icon"></i>
+                                        <input type="email" placeholder="Email" required>
+                                    </div>
+                                </div>
+
+                                <div class="mb-20">
+                                    <label class="mb-10 fw-semibold">Phone</label>
+                                    <div class="form-input-box">
+                                        <i class="fa-solid fa-phone-volume form-icon"></i>
+                                        <input type="number" placeholder="Phone">
+                                    </div>
+                                </div>
+                                <div class="mb-20">
+                                    <label class="mb-10 fw-semibold">Blood Group</label>
+                                    <div class="form-input-box">
+                                        <i class="fa-solid fa-heart-pulse form-icon"></i>
+                                        <select id="Blood-group" class="wide">
+                                            <option value="0">Select</option>
+                                            <option value="1">A+</option>
+                                            <option value="2">A-</option>
+                                            <option value="3">B+</option>
+                                            <option value="4">B-</option>
+                                            <option value="5">AB+</option>
+                                            <option value="6">AB-</option>
+                                            <option value="7">O+</option>
+                                            <option value="8">O-</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="mb-20">
+                                    <label class="mb-10 fw-semibold">Address</label>
+                                    <textarea class="form-input-textbox" id="address" rows="5"
+                                        placeholder="Address"></textarea>
+                                </div>
+
+                                <div>
+                                    <label class="mb-10 fw-semibold">Status<span class="tsc-1">*</span></label>
+                                    <div class="form-input-box">
+                                        <i class="fa-regular fa-circle-check form-icon"></i>
+                                        <select id="status" class="wide">
+                                            <option value="active">Active</option>
+                                            <option value="inactive">Inactive</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                    <div class="d-flex align-items-center gap-sm-4 gap-3 mt-sm-40 mt-4">
+                        <button class="btn-2 para-1b fw-bold">Submit</button>
+                        <button class="btn-1 para-1b fw-bold">Cancel</button>
+                    </div>
+                </div>
+
+            </div>
+            <!-- main content end -->
+
+            <!-- footer start  -->
+            <footer>
+                <div class="container-fluid">
+                    <span class="para-1b fs-base text-center text-sm-start d-block ">Copyright © <span
+                            class="currentYear"></span> HealthEase Medical. All
+                        rights reserved.</span>
+                </div>
+            </footer>
+            <!-- footer end  -->
+        </div>
+        <!-- content section end   -->
+    </main>
+    <!-- main content & top header end  -->
+
+
+    <!-- jquery -->
+    <script src="../assets/js/plugin/jquery-3.7.0.min.js"></script>
+    <!-- bootstrap js  -->
+    <script src="../assets/js/plugin/bootstrap.min.js"></script>
+    <!-- nice select  -->
+    <script src="../assets/js/plugin/jquery.nice-select.min.js"></script>
+    <!-- chart js  -->
+    <script src="../assets/js/plugin/cdn.jsdelivr.net_npm_chart.js"></script>
+    <!-- plugin customize js  -->
+    <script src="../assets/js/pluginCustomization.js"></script>
+
+    <!-- main js  -->
+    <script src="../assets/js/main.js"></script>
+</body>
+
+</html>
