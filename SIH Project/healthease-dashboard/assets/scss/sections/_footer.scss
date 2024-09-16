@@ -1,0 +1,11 @@
+footer{
+    padding: 30px;
+    border-radius: 10px 10px 0px 0px;
+    background: var(--white);
+    width: 100%;
+    margin-top: 30px;
+
+    @media (max-width:575px) {
+        padding: 10px;
+    }
+}
