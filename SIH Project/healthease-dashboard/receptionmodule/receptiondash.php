@@ -80,6 +80,12 @@ $user_data = check_login($con);
                             </a>
                         </li>
                         <li>
+                            <a href="addbed.html">
+                                <i class="fa-solid fa-bed"></i>
+                                <span class="show-item">Bed records</span>
+                            </a>
+                        </li>
+                        <li>
                             <a href="patient.html">
                                 <i class="fa-solid fa-bed-pulse"></i>
                                 <span class="show-item"> Patient </span>
