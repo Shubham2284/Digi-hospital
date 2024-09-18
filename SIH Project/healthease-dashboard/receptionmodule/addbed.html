@@ -343,13 +343,11 @@
     const app = initializeApp(firebaseConfig);
     const db = getDatabase(app);
 
-    // Reference to the beds data in the database
+    // Reference to the beds and allocated beds data in the database
     const bedsRef = ref(db, 'BedSet/Cigma Hospital');
-
-    // Reference to the allocated beds data
     const allocatedBedsRef = ref(db, 'AllocationSet/Cigma Hospital');
 
-    // Function to load data from Firebase (BedSet) and calculate remaining beds
+    // Function to load bed data from Firebase and calculate remaining beds
     async function loadBeds() {
         try {
             const snapshot = await get(bedsRef);
@@ -360,62 +358,59 @@
                 let totalBeds = 0;
                 let remainingBeds = 0;
 
-                // Iterate over the data and populate the table
+                // Populate the table with bed data
                 for (const [bedId, { roomNumber, status = 'Not Allocated' }] of Object.entries(data)) {
                     const newRow = bedsTable.insertRow();
                     const bedIdCell = newRow.insertCell(0);
                     const roomNumberCell = newRow.insertCell(1);
                     const statusCell = newRow.insertCell(2);
-                    const actionCell = newRow.insertCell(3); // New action cell
+                    const actionCell = newRow.insertCell(3); // Action cell for Allocate button
 
                     bedIdCell.textContent = bedId;
                     roomNumberCell.textContent = roomNumber;
                     statusCell.textContent = status;
 
-                    // Add "Allocate" button if bed is not allocated
+                    // Add Allocate button if the bed is not allocated
                     if (status === 'Not Allocated') {
                         const allocateButton = document.createElement('button');
                         allocateButton.textContent = 'Allocate';
+                        allocateButton.classList.add('allocate-button');
                         allocateButton.onclick = () => showBedDetails(bedId, roomNumber);
-                        allocateButton.classList.add('allocate-button'); // Open modal on click
                         actionCell.appendChild(allocateButton);
                     } else {
-                        actionCell.textContent = 'N/A'; // No action if already allocated
+                        actionCell.textContent = 'N/A'; // No action if allocated
                     }
 
                     totalBeds++;
-
-                    // Increment remaining beds count if the status is "Not Allocated"
                     if (status === 'Not Allocated') {
                         remainingBeds++;
                     }
                 }
 
-                // Update total number of beds and remaining beds
+                // Update total and remaining beds in the UI
                 document.getElementById('totalBeds').textContent = totalBeds;
                 document.getElementById('remainingBeds').textContent = remainingBeds;
             } else {
                 console.log('No data available');
             }
         } catch (error) {
-            console.error('Error retrieving data:', error.message);
+            console.error('Error retrieving bed data:', error.message);
         }
     }
 
-
-    // Function to show bed details in modal
+    // Function to show bed details in a modal
     function showBedDetails(bedId, roomNumber) {
         document.getElementById('modalBedId').textContent = bedId;
         document.getElementById('modalRoomNumber').textContent = roomNumber;
 
         const modal = document.getElementById('bedDetailsModal');
-        modal.style.display = 'flex'; // Show modal
+        modal.style.display = 'flex'; // Show the modal
 
         const allocateButton = document.getElementById('allocateButton');
-        allocateButton.onclick = () => allocateBed(bedId, roomNumber); // Assign the allocate function
+        allocateButton.onclick = () => allocateBed(bedId, roomNumber); // Set the allocate function
     }
 
-    // Function to allocate the bed
+    // Function to allocate the bed to a patient
     async function allocateBed(bedId, roomNumber) {
         const patientId = document.getElementById('modalPatientId').value;
         if (patientId === '') {
@@ -423,31 +418,35 @@
             return;
         }
 
-        // Update the bed status in the database
-        const bedUpdate = {};
-        bedUpdate[`BedSet/Cigma hospital/${bedId}/status`] = 'Allocated';
+        try {
+            // Update the bed status in Firebase
+            const bedUpdate = {};
+            bedUpdate[`BedSet/Cigma Hospital/${bedId}/status`] = 'Allocated';
 
-        // Store the allocation in a new "AllocationSet" reference
-        const allocationRef = ref(db, `AllocationSet/Cigma hospital/${bedId}`);
-        await set(allocationRef, {
-            bedId: bedId,
-            roomNumber: roomNumber,
-            patientId: patientId,
-            status: 'Allocated'
-        });
+            // Store the allocation in "AllocationSet"
+            const allocationRef = ref(db, `AllocationSet/Cigma Hospital/${bedId}`);
+            await set(allocationRef, {
+                bedId: bedId,
+                roomNumber: roomNumber,
+                patientId: patientId,
+                status: 'Allocated'
+            });
 
-        // Update the bed status
-        await update(ref(db), bedUpdate);
+            // Update the bed status
+            await update(ref(db), bedUpdate);
 
-        // Reload the data and update remaining beds count
-        loadBeds();
-        loadAllocatedBeds();
+            // Reload bed and allocation data
+            loadBeds();
+            loadAllocatedBeds();
 
-        // Close the modal
-        document.getElementById('bedDetailsModal').style.display = 'none';
+            // Close the modal
+            document.getElementById('bedDetailsModal').style.display = 'none';
+        } catch (error) {
+            console.error('Error allocating bed:', error.message);
+        }
     }
 
-    // Function to load allocated beds from the "AllocationSet"
+    // Function to load allocated beds from "AllocationSet"
     async function loadAllocatedBeds() {
         try {
             const snapshot = await get(allocatedBedsRef);
@@ -456,7 +455,7 @@
                 const allocatedBedsTable = document.getElementById('allocatedBedsTable').getElementsByTagName('tbody')[0];
                 allocatedBedsTable.innerHTML = ''; // Clear existing data
 
-                // Iterate over allocated beds and populate the table
+                // Populate allocated beds table
                 for (const [bedId, { roomNumber, patientId, status }] of Object.entries(data)) {
                     const newRow = allocatedBedsTable.insertRow();
                     const bedIdCell = newRow.insertCell(0);
@@ -481,7 +480,7 @@
                 console.log('No allocated beds found');
             }
         } catch (error) {
-            console.error('Error retrieving allocated beds:', error.message);
+            console.error('Error loading allocated beds:', error.message);
         }
     }
 
@@ -489,12 +488,12 @@
     async function deallocateBed(bedId) {
         try {
             // Remove the allocation from "AllocationSet"
-            const allocationRef = ref(db, `AllocationSet/Cigma hospital/${bedId}`);
+            const allocationRef = ref(db, `AllocationSet/Cigma Hospital/${bedId}`);
             await remove(allocationRef);
 
-            // Update the bed status in the "BedSet" to "Not Allocated"
+            // Update the bed status in "BedSet" to "Not Allocated"
             const bedUpdate = {};
-            bedUpdate[`BedSet/Cigma hospital/${bedId}/status`] = 'Not Allocated';
+            bedUpdate[`BedSet/Cigma Hospital/${bedId}/status`] = 'Not Allocated';
             await update(ref(db), bedUpdate);
 
             // Reload the beds and allocated beds
@@ -505,11 +504,12 @@
         }
     }
 
-    // Load beds and allocated beds when the page loads
+    // Load bed and allocated bed data when the page loads
     window.onload = function () {
         loadBeds();
         loadAllocatedBeds();
     };
+
 </script>
 
 </html>

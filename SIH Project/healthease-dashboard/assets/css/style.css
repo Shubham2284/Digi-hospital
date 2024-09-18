@@ -13916,7 +13916,7 @@ header .language .nice-select::after {
 
     .list-body,
     .prescription-table {
-        overflow-x: scroll;
+        overflow-x: auto;
         width: 100%;
     }
 

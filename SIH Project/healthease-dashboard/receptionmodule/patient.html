@@ -199,29 +199,29 @@
                             <th>Aadhar number</th>
                             <th>Blood Group</th>
                             <th>Address</th>
+                            <!--<th>Bed Type</th>-->
+                            <th>bedData</th>
                             <th>Checkin date</th>
                         </tbody>
-                        <tbody>
-                            
+                        <tbody id="patientData">
+
                         </tbody>
-                    <!-- pagination end  -->
+                    </table>
+                    <footer>
+                        <div class="container-fluid">
+                            <span class="para-1b fs-base text-center text-sm-start d-block ">Copyright © <span
+                                    class="currentYear"></span> HealthEase Medical. All
+                                rights reserved.</span>
+                        </div>
+                    </footer>
+                        <!-- pagination end  -->
                 </div>
-
+                
             </div>
-            <!-- main content end -->
-
-            <!-- footer start  -->
-            <footer>
-                <div class="container-fluid">
-                    <span class="para-1b fs-base text-center text-sm-start d-block ">Copyright © <span
-                            class="currentYear"></span> HealthEase Medical. All
-                        rights reserved.</span>
-                </div>
-            </footer>
-            <!-- footer end  -->
-        </div>
+            
         <!-- content section end   -->
     </main>
+    
     <!-- main content & top header end  -->
 
 
@@ -241,55 +241,71 @@
     <script src="../assets/js/main.js"></script>
 </body>
 <script type="module">
-    // Import the functions you need from the SDKs you need
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.13.1/firebase-app.js";
-    import { getDatabase, ref, get, update, remove, set } from "https://www.gstatic.com/firebasejs/10.13.1/firebase-database.js";
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/10.13.1/firebase-app.js";
+        import { getDatabase, ref, child, get } from "https://www.gstatic.com/firebasejs/10.13.1/firebase-database.js";
 
-    // Your web app's Firebase configuration
-    const firebaseConfig = {
-        apiKey: "AIzaSyCgnX1Jce-Or-XLXtn0JTEmDgWaW8uwFvk",
-        authDomain: "ehospital-f4db4.firebaseapp.com",
-        databaseURL: "https://ehospital-f4db4-default-rtdb.firebaseio.com",
-        projectId: "ehospital-f4db4",
-        storageBucket: "ehospital-f4db4.appspot.com",
-        messagingSenderId: "536685497139",
-        appId: "1:536685497139:web:1475c7f324ae487fa10c46"
-    };
+        // Firebase configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyCgnX1Jce-Or-XLXtn0JTEmDgWaW8uwFvk",
+            authDomain: "ehospital-f4db4.firebaseapp.com",
+            databaseURL: "https://ehospital-f4db4-default-rtdb.firebaseio.com",
+            projectId: "ehospital-f4db4",
+            storageBucket: "ehospital-f4db4.appspot.com",
+            messagingSenderId: "536685497139",
+            appId: "1:536685497139:web:1475c7f324ae487fa10c46"
+        };
 
-    // Initialize Firebase
-    const app = initializeApp(firebaseConfig);
-    const db = getDatabase(app);
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const db = getDatabase();
 
-    const patientref = ref(db, 'PatientSet/Cigma hospital');
+        // Function to retrieve data
+        function retrievePatientData() {
+            const dbRef = ref(db);
 
-    async function loadPatients(){
-        try{
-            const snapshot = await get(patientref);
-            if(snapshot.exists()){
-                const data = snapshot.val();
-                const ptable = document.getElementById('ptable').getElementsByTagName('tbody')[0];
-                ptable.innerHTML = '';
+            // Retrieve patient data
+            get(child(dbRef, 'PatientSet')).then((snapshot) => {
+                if (snapshot.exists()) {
+                    const patients = snapshot.val();
+                    const tableBody = document.getElementById('patientData');
+                    tableBody.innerHTML = ''; // Clear the table first
 
-                for(const [patientId,{nameofpatient}]of Object.entries(data)){
-                    const newRow = ptable.insertRow();
-                    const patientIdCell = newRow.insertCell(0);
-                    const nameofpatientCell = newRow.insertCell(1);
-                    const ageofpatientCell = newRow.insertCell(2);
-                    const genderofpatient = newRow.insertCell(3);
-                    const phoneofpatientCell = newRow.insertCell(4);
-                    const emailofpatientCell = newRow.insertCell(5);
-                    const aadharofpatientCell = newRow.insertCell(6);
-                    const bloodofpatientCell = newRow.insertCell(7);
-                    const bedofpatient = newRow.insertCell(8);
-                    const addressCell = newRow.insertCell(9);
-                    const dateofcheckin = newRow.insertCell(10);
+                    Object.keys(patients).forEach((key) => {
+                        const patient = patients[key];
+
+                        // Now fetch the associated bed data from BedSet
+                        get(child(dbRef, `AllocationSet/${patient.bedofpatient}`)).then((bedSnapshot) => {
+                            const bedData = bedSnapshot.exists() ? bedSnapshot.val() : { bedId: "N/A" };
+
+                            // Create a new row in the table for each patient
+                            const row = `<tr>
+                                <td>${patient.PatientId}</td>
+                                <td>${patient.nameofpatient}</td>
+                                <td>${patient.ageofpatient}</td>
+                                <td>${patient.genderofpatient}</td>
+                                <td>${patient.phoneofpatient}</td>
+                                <td>${patient.emailofpatient}</td>
+                                <td>${patient.aadharofpatient}</td>
+                                <td>${patient.bloodofpatient}</td>
+                                <td>${patient.addressofpatient}</td>
+                                <td>${patient.dateofcheckin}</td>
+                                <td>${bedData.bedId}</td>
+                            </tr>`;
+                            tableBody.innerHTML += row;
+                        }).catch((error) => {
+                            console.error("Error retrieving bed data:", error);
+                        });
+                    });
+                } else {
+                    console.log("No patient data available.");
                 }
-            }
-            else{
-                console.log('')
-            }
+            }).catch((error) => {
+                console.error("Error retrieving patient data:", error);
+            });
         }
-    }
-    </script>
+
+        // Call the function when the page loads
+        window.onload = retrievePatientData;
+</script>
 
 </html>
