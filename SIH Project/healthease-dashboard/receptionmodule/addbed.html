@@ -69,7 +69,7 @@
                             </a>
                         </li>
                         <li class="active">
-                            <a href="#">
+                            <a href="patient.html">
                                 <i class="fa-solid fa-bed-pulse"></i>
                                 <span class="show-item"> Patient </span>
                             </a>
@@ -188,13 +188,13 @@
                         </div>
                     </div>
                     <!-- pop up filter box end -->
-                    
+
                     <table class="list-table" id="itemTable">
                         <thead>
                             <tr>
                                 <th class="sort-devices"><img class="me-10" src="../assets/img/up-down.png"
                                         alt="up-down">
-                                        Bed ID
+                                    Bed ID
                                 </th>
                                 <th class="sort-devices"><img class="me-10" src="../assets/img/up-down.png"
                                         alt="up-down">Room Number
@@ -203,8 +203,8 @@
                                         alt="up-down">Status
                                 </th>
                                 <th class="sort-devices"><img class="me-10" src="../assets/img/up-down.png"
-                                    alt="up-down">Action
-                            </th>
+                                        alt="up-down">Action
+                                </th>
                             </tr>
                         </thead>
                         <tbody>
@@ -247,62 +247,63 @@
                                 Filter</button>
                         </div>
                     </div>
-                <table class="list-table" id="allocatedBedsTable">
-                    <thead>
-                        <tr>
-                            <th>Bed ID</th>
-                            <th>Room Number</th>
-                            <th>Patient ID</th>
-                            <th>Status</th>
-                            <th>Action</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <!-- Allocated bed records will be dynamically added here -->
-                    </tbody>
-                </table>
-                <div class="list-footer d-between bgnc-10 br-brl-sm px-30 py-3">
-                    <span class="para-1b fs-base d-block">Showing 1 to 10 of 14 entries</span>
-                    <ul class="pagination-item">
-                        <li class="page-item">
-                            <a class="page-link" href="javascript:void(0)" aria-label="Previous">
-                                <span aria-hidden="true"><i class="fa-solid fa-angles-left"></i></span>
-                            </a>
-                        </li>
-                        <li class="page-item "><a class="page-link" href="javascript:void(0)">1</a></li>
-                        <li class="page-item active"><a class="page-link" href="javascript:void(0)">2</a></li>
-                        <li class="page-item"><a class="page-link" href="javascript:void(0)">3</a></li>
-                        <li class="page-item">
-                            <a class="page-link" href="javascript:void(0)" aria-label="Next">
-                                <span aria-hidden="true"><i class="fa-solid fa-angles-right"></i></span>
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-                <div class="modal" id="bedDetailsModal">
-                    <div class="modal-content">
-                        <h3>Bed Allocation</h3>
-                        <p><strong>Bed ID:</strong> <span id="modalBedId"></span></p>
-                        <p><strong>Room Number:</strong> <span id="modalRoomNumber"></span></p>
-                        <p><strong>Patient ID:</strong> <input type="text" id="modalPatientId" placeholder="Enter Patient ID"></p>
-                        <button id="allocateButton" class=" btn-1 para-1b allocate-button">Allocate</button>
+                    <table class="list-table" id="allocatedBedsTable">
+                        <thead>
+                            <tr>
+                                <th>Bed ID</th>
+                                <th>Room Number</th>
+                                <th>Patient ID</th>
+                                <th>Status</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Allocated bed records will be dynamically added here -->
+                        </tbody>
+                    </table>
+                    <div class="list-footer d-between bgnc-10 br-brl-sm px-30 py-3">
+                        <span class="para-1b fs-base d-block">Showing 1 to 10 of 14 entries</span>
+                        <ul class="pagination-item">
+                            <li class="page-item">
+                                <a class="page-link" href="javascript:void(0)" aria-label="Previous">
+                                    <span aria-hidden="true"><i class="fa-solid fa-angles-left"></i></span>
+                                </a>
+                            </li>
+                            <li class="page-item "><a class="page-link" href="javascript:void(0)">1</a></li>
+                            <li class="page-item active"><a class="page-link" href="javascript:void(0)">2</a></li>
+                            <li class="page-item"><a class="page-link" href="javascript:void(0)">3</a></li>
+                            <li class="page-item">
+                                <a class="page-link" href="javascript:void(0)" aria-label="Next">
+                                    <span aria-hidden="true"><i class="fa-solid fa-angles-right"></i></span>
+                                </a>
+                            </li>
+                        </ul>
                     </div>
-                </div>
+                    <div class="modal" id="bedDetailsModal">
+                        <div class="modal-content">
+                            <h3>Bed Allocation</h3>
+                            <p><strong>Bed ID:</strong> <span id="modalBedId"></span></p>
+                            <p><strong>Room Number:</strong> <span id="modalRoomNumber"></span></p>
+                            <p><strong>Patient ID:</strong> <input type="text" id="modalPatientId"
+                                    placeholder="Enter Patient ID"></p>
+                            <button id="allocateButton" class=" btn-1 para-1b allocate-button">Allocate</button>
+                        </div>
+                    </div>
 
+                </div>
+                <!-- main content end -->
+
+                <!-- footer start  -->
+                <footer>
+                    <div class="container-fluid">
+                        <span class="para-1b fs-base text-center text-sm-start d-block ">Copyright © <span
+                                class="currentYear"></span> HealthEase Medical. All
+                            rights reserved.</span>
+                    </div>
+                </footer>
+                <!-- footer end  -->
             </div>
-            <!-- main content end -->
-
-            <!-- footer start  -->
-            <footer>
-                <div class="container-fluid">
-                    <span class="para-1b fs-base text-center text-sm-start d-block ">Copyright © <span
-                            class="currentYear"></span> HealthEase Medical. All
-                        rights reserved.</span>
-                </div>
-            </footer>
-            <!-- footer end  -->
-        </div>
-        <!-- content section end   -->
+            <!-- content section end   -->
     </main>
     <!-- main content & top header end  -->
 
@@ -343,63 +344,63 @@
     const db = getDatabase(app);
 
     // Reference to the beds data in the database
-    const bedsRef = ref(db, 'BedSet/Cigma hospital');
+    const bedsRef = ref(db, 'BedSet/Cigma Hospital');
 
     // Reference to the allocated beds data
-    const allocatedBedsRef = ref(db, 'AllocationSet/Cigma hospital');
+    const allocatedBedsRef = ref(db, 'AllocationSet/Cigma Hospital');
 
     // Function to load data from Firebase (BedSet) and calculate remaining beds
     async function loadBeds() {
-try {
-    const snapshot = await get(bedsRef);
-    if (snapshot.exists()) {
-        const data = snapshot.val();
-        const bedsTable = document.getElementById('itemTable').getElementsByTagName('tbody')[0];
-        bedsTable.innerHTML = ''; // Clear existing data
-        let totalBeds = 0;
-        let remainingBeds = 0;
+        try {
+            const snapshot = await get(bedsRef);
+            if (snapshot.exists()) {
+                const data = snapshot.val();
+                const bedsTable = document.getElementById('itemTable').getElementsByTagName('tbody')[0];
+                bedsTable.innerHTML = ''; // Clear existing data
+                let totalBeds = 0;
+                let remainingBeds = 0;
 
-        // Iterate over the data and populate the table
-        for (const [bedId, { roomNumber, status = 'Not Allocated' }] of Object.entries(data)) {
-            const newRow = bedsTable.insertRow();
-            const bedIdCell = newRow.insertCell(0);
-            const roomNumberCell = newRow.insertCell(1);
-            const statusCell = newRow.insertCell(2);
-            const actionCell = newRow.insertCell(3); // New action cell
+                // Iterate over the data and populate the table
+                for (const [bedId, { roomNumber, status = 'Not Allocated' }] of Object.entries(data)) {
+                    const newRow = bedsTable.insertRow();
+                    const bedIdCell = newRow.insertCell(0);
+                    const roomNumberCell = newRow.insertCell(1);
+                    const statusCell = newRow.insertCell(2);
+                    const actionCell = newRow.insertCell(3); // New action cell
 
-            bedIdCell.textContent = bedId;
-            roomNumberCell.textContent = roomNumber;
-            statusCell.textContent = status;
+                    bedIdCell.textContent = bedId;
+                    roomNumberCell.textContent = roomNumber;
+                    statusCell.textContent = status;
 
-            // Add "Allocate" button if bed is not allocated
-            if (status === 'Not Allocated') {
-                const allocateButton = document.createElement('button');
-                allocateButton.textContent = 'Allocate';
-                allocateButton.onclick = () => showBedDetails(bedId, roomNumber);
-                allocateButton.classList.add('allocate-button'); // Open modal on click
-                actionCell.appendChild(allocateButton);
+                    // Add "Allocate" button if bed is not allocated
+                    if (status === 'Not Allocated') {
+                        const allocateButton = document.createElement('button');
+                        allocateButton.textContent = 'Allocate';
+                        allocateButton.onclick = () => showBedDetails(bedId, roomNumber);
+                        allocateButton.classList.add('allocate-button'); // Open modal on click
+                        actionCell.appendChild(allocateButton);
+                    } else {
+                        actionCell.textContent = 'N/A'; // No action if already allocated
+                    }
+
+                    totalBeds++;
+
+                    // Increment remaining beds count if the status is "Not Allocated"
+                    if (status === 'Not Allocated') {
+                        remainingBeds++;
+                    }
+                }
+
+                // Update total number of beds and remaining beds
+                document.getElementById('totalBeds').textContent = totalBeds;
+                document.getElementById('remainingBeds').textContent = remainingBeds;
             } else {
-                actionCell.textContent = 'N/A'; // No action if already allocated
+                console.log('No data available');
             }
-
-            totalBeds++;
-
-            // Increment remaining beds count if the status is "Not Allocated"
-            if (status === 'Not Allocated') {
-                remainingBeds++;
-            }
+        } catch (error) {
+            console.error('Error retrieving data:', error.message);
         }
-
-        // Update total number of beds and remaining beds
-        document.getElementById('totalBeds').textContent = totalBeds;
-        document.getElementById('remainingBeds').textContent = remainingBeds;
-    } else {
-        console.log('No data available');
     }
-} catch (error) {
-    console.error('Error retrieving data:', error.message);
-}
-}
 
 
     // Function to show bed details in modal
@@ -505,7 +506,7 @@ try {
     }
 
     // Load beds and allocated beds when the page loads
-    window.onload = function() {
+    window.onload = function () {
         loadBeds();
         loadAllocatedBeds();
     };

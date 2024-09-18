@@ -75,7 +75,7 @@
                                 <span class="show-item">Bed records</span>
                             </a>
                         </li>
-                        
+
                         <li>
                             <a href="patient.html">
                                 <i class="fa-solid fa-bed-pulse"></i>
@@ -164,6 +164,14 @@
                             <div class="col-lg-6">
 
                                 <div class="mb-20">
+                                    <label class="mb-10 fw-semibold">PatientID <span class="tsc-1">*</span></label>
+                                    <div class="form-input-box">
+                                        <i class="fa-solid fa-user-nurse form-icon"></i>
+                                        <input type="text" placeholder="PatientID" id="patientId" required>
+                                    </div>
+                                </div>
+
+                                <div class="mb-20">
                                     <label class="mb-10 fw-semibold">Name <span class="tsc-1">*</span></label>
                                     <div class="form-input-box">
                                         <i class="fa-solid fa-user-nurse form-icon"></i>
@@ -190,19 +198,7 @@
                                         </select>
                                     </div>
                                 </div>
-                                <div class="mb-20">
-                                    <label class="mb-10 fw-semibold">Select Bed</label>
-                                    <div class="form-input-box">
-                                        <i class="fa-solid fa-bed form-icon"></i>
-                                        <select id="patientbed" class="wide">
-                                            <option value="0">Select</option>
-                                            <option value="General">General</option>
-                                            <option value="ICU">ICU</option>
-                                            <option value="Private">Private</option>
-                                            <option value="Semi-Private">Semi-Private</option>
-                                        </select>
-                                    </div>
-                                </div>
+
                                 <div>
                                     <label class="mb-10 fw-semibold">Date of Birth<span class="tsc-1">*</span></label>
                                     <div class="form-input-box">
@@ -267,8 +263,8 @@
                 </div>
                 </form>
                 <div class="d-flex align-items-center gap-sm-4 gap-3 mt-sm-40 mt-4">
-                    <button class="btn-2 para-1b fw-bold">Retrive</button>
-                    <button class="btn-2 para-1b fw-bold">Submit</button>
+                    <button class="btn-2 para-1b fw-bold" id="retbtn">Retrive</button>
+                    <button class="btn-2 para-1b fw-bold" id="subbtn">Submit</button>
                     <button class="btn-1 para-1b fw-bold">Cancel</button>
                 </div>
             </div>
@@ -305,5 +301,215 @@
     <!-- main js  -->
     <script src="../assets/js/main.js"></script>
 </body>
+
+<script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.13.1/firebase-app.js";
+    import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.13.1/firebase-analytics.js";
+    import { getDatabase, ref, child, get, set, update, remove } from "https://www.gstatic.com/firebasejs/10.13.1/firebase-database.js";
+    import { getStorage, ref as sRef, uploadBytesResumable, getDownloadURL } from "https://www.gstatic.com/firebasejs/10.13.1/firebase-storage.js";
+
+    // Firebase configuration
+    const firebaseConfig = {
+        apiKey: "AIzaSyCgnX1Jce-Or-XLXtn0JTEmDgWaW8uwFvk",
+        authDomain: "ehospital-f4db4.firebaseapp.com",
+        databaseURL: "https://ehospital-f4db4-default-rtdb.firebaseio.com",
+        projectId: "ehospital-f4db4",
+        storageBucket: "ehospital-f4db4.appspot.com",
+        messagingSenderId: "536685497139",
+        appId: "1:536685497139:web:1475c7f324ae487fa10c46"
+    };
+
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+    const analytics = getAnalytics(app);
+
+    // Initialize Database
+    const db = getDatabase();
+
+    //all the imput fields
+    let Patientnme = document.getElementById('Patientnme');
+    let Patientage = document.getElementById('Patientage');
+    let Patientgender = document.getElementById('Patientgender');
+    let Patientdate = document.getElementById('Patientdate');
+    let Patientmail = document.getElementById('Patientmail');
+    let Patientphone = document.getElementById('Patientphone');
+    let Blood_group = document.getElementById('Blood-group');
+    let Patientuidi = document.getElementById('Patientuidi');
+    let address = document.getElementById('address');
+
+    //the buttons
+    let submitbtn = document.getElementById('subbtn');
+    let retrivebtn = document.getElementById('retbtn');
+
+
+
+    function Interface(e) {
+        let BtnId = e.target.id;
+        if (BtnId === "retbtn") {
+            RetData();
+        } else if (BtnId === "subbtn") {
+            UpdateData();
+        }
+    }
+
+    submitbtn.addEventListener('click', Interface);
+    retrivebtn.addEventListener('click', Interface);
+
+    function RetData() {
+        const dbRef = ref(db);
+
+        get(child(dbRef, 'PatientSet/' + Patientphone.value)).then((snapshot) => {
+            if (snapshot.exists()) {
+                // Populate form with patient data
+                Patientnme.value = snapshot.val().nameofpatient;
+                Patientage.value = snapshot.val().ageofpatient;
+                Patientgender.value = snapshot.val().genderofpatient;
+                Patientdate.value = snapshot.val().dateofcheckin;
+                Patientmail.value = snapshot.val().emailofpatient;
+                Blood_group.value = snapshot.val().bloodofpatient;
+                Patientuidi.value = snapshot.val().aadharofpatient;
+                address.value = snapshot.val().addressofpatient;
+            } else {
+                alert("Patient does not exist");
+            }
+        }).catch((error) => {
+            alert("Error retrieving data");
+            console.log(error);
+        });
+    }
+
+
+    function UpdateData() {
+        update(ref(db, 'PatientSet/' + Patientphone.value), {
+            nameofpatient: Patientnme.value,
+            ageofpatient: Number(Patientage.value),
+            genderofpatient: Patientgender.value,
+            dateofcheckin: Patientdate.value,
+            emailofpatient: Patientmail.value,
+            bloodofpatient: Blood_group.value,
+            aadharofpatient: Number(Patientuidi.value),
+            addressofpatient: address.value
+        }).then(() => {
+            alert("Patient data updated successfully");
+        }).catch((error) => {
+            alert("Error updating data");
+            console.log(error);
+        });
+    }
+
+
+
+    /*
+        function Interface(e) {
+            let BtnId = e.target.id;
+            const dbRef = ref(db);
+            if (BtnId == "RetBtn") {
+                RetData();
+                return;
+            }
+    
+            get(child(dbRef, 'PatientSet/' + Patientphone.value)).then((snapshot) => {
+                if (snapshot.exists()) {
+                    if (BtnId == "submitbtn")
+                        alert("Employee already exists, duplicates not allowed");
+    
+                    else if (BtnId == "#")
+                        UpdateData();
+    
+                    else if (BtnId == "#")
+                        DeleteData();
+    
+                }
+                else {
+                    if (BtnId == "submitbtn")
+                     //   AddData();
+                    
+                                    else if (BtnId == "#")
+                        alert("Cannot Update Employee Does not exist");
+    
+                    else if (BtnId == "#")
+                        alert("Cannot Delete Employee Does not exist");
+    
+                }
+            })
+                .catch((error) => {
+                    alert("Unsuccessful");
+                    console.log(error);
+                })
+    
+    
+    
+        }
+        
+            function AddData() {
+                set(ref(db, 'PatientSet/' + Patientuidi.value), {
+                    nameofpatient: Patientnme.value,
+                    ageofpatient: Number(Patientage.value),
+                    genderofpatient: Patientgender.value,
+                    dateofcheckin: Patientdate.value,
+                    bedofpatient: Patientbed.value,
+                    emailofpatient: Patientmail.value,
+                    phoneofpatient: Patientphone.value,
+                    bloodofpatient: Blood_group.value,
+                    aadharofpatient: Number(Patientuidi.value),
+                    addressofpatient: address.value
+        
+                }).then(() => {
+                    alert("Data Added Successfully");
+                })
+                    .catch((error) => {
+                        alert("Unsuccessful");
+                        console.log(error);
+                    })
+            }
+    
+        function RetData() {
+            const dbRef = ref(db);
+    
+            get(child(dbRef, 'EmployeeSet/' + RollnoInp.value)).then((snapshot) => {
+                if (snapshot.exists()) {
+                    FnameInp.value = snapshot.val().nameofemployee.firstname;
+                    LnameInp.value = snapshot.val().nameofemployee.lastname;
+                    DeptInp.value = snapshot.val().department;
+                    SwimInp.value = (snapshot.val().canswim) ? "yes" : "no";
+                }
+                else {
+                    alert("Employee does not exist");
+                }
+            })
+                .catch((error) => {
+                    alert("Unsuccessful");
+                    console.log(error);
+                })
+        }
+    
+        function UpdateData() {
+            update(ref(db, 'EmployeeSet/' + RollnoInp.value), {
+                nameofemployee: { firstname: FnameInp.value, lastname: LnameInp.value },
+                department: DeptInp.value,
+                canswim: (SwimInp.value == "yes")
+            }).then(() => {
+                alert("Data Updated Successfully");
+            })
+                .catch((error) => {
+                    alert("Unsuccessful");
+                    console.log(error);
+                })
+        }
+        
+            function DeleteData() {
+                remove(ref(db, 'EmployeeSet/' + RollnoInp.value),)
+                    .then(() => {
+                        alert("Data Deleted Successfully");
+                    })
+                    .catch((error) => {
+                        alert("Unsuccessful");
+                        console.log(error);
+                    })
+            }
+        
+        */
+
+</script>
 
 </html>

@@ -12,8 +12,11 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     if (!empty($user_name) && !empty($password) && !is_numeric($user_name)) {
 
         // Query the database for the user
-        $query = "SELECT * FROM reception WHERE user_name = '$user_name' LIMIT 1";
-        $result = mysqli_query($con, $query);
+        $query = "SELECT * FROM reception WHERE user_name = ? LIMIT 1";
+        $stmt = mysqli_prepare($con, $query);
+        mysqli_stmt_bind_param($stmt, "s", $user_name);
+        mysqli_stmt_execute($stmt);
+        $result = mysqli_stmt_get_result($stmt);
 
         if ($result && mysqli_num_rows($result) > 0) {
             $user_data = mysqli_fetch_assoc($result);
@@ -22,6 +25,8 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
             if (password_verify($password, $user_data['password'])) {
                 // Password matches, set session and redirect to dashboard
                 $_SESSION['user_id'] = $user_data['user_id'];
+                $_SESSION['user_name'] = $user_name; // Store username in session
+
                 header("Location: receptiondash.php");
                 die;
             } else {
@@ -37,6 +42,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     }
 }
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">

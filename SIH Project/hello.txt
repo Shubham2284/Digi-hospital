@@ -1,0 +1,227 @@
+/*
+        // Event Listener for Submit Button
+        submitBtn.addEventListener('click', function (event) {
+            event.preventDefault();
+            checkAndAddPatient();
+        });
+    
+        // Function to check if patient already exists
+        function checkAndAddPatient() {
+            const dbRef = ref(db);
+            get(child(dbRef, 'PatientSet/' + patientPhone.value)).then((snapshot) => {
+                if (snapshot.exists()) {
+                    alert("Patient already exists, duplicates not allowed");
+                } else {
+                    addPatientData();
+                }
+            }).catch((error) => {
+                alert("Error checking patient data.");
+                console.error(error);
+            });
+        }
+        /*
+            // Function to add patient data
+            function addPatientData() {
+                generatePatientId().then((patientId) => {
+                    set(ref(db, 'PatientSet/' + patientPhone.value), {
+                        PatientId: patientId,
+                        nameofpatient: patientName.value,
+                        ageofpatient: Number(patientAge.value),
+                        genderofpatient: patientGender.value,
+                        dateofcheckin: patientDate.value,
+                        bedofpatient: patientBed.value,
+                        emailofpatient: patientEmail.value,
+                        phoneofpatient: patientPhone.value,
+                        bloodofpatient: bloodGroup.value,
+                        aadharofpatient: Number(patientUID.value),
+                        addressofpatient: address.value
+                    }).then(() => {
+                        alert("Patient data added successfully");
+                    }).catch((error) => {
+                        alert("Error adding patient data.");
+                        console.error(error);
+                    });
+                });
+            }*/
+    /*
+     function generatePatientId() {
+     const patientSetRef = ref(db, 'PatientSet');
+
+     return get(patientSetRef).then((snapshot) => {
+         if (snapshot.exists()) {
+             const patients = snapshot.val();
+             let lastId = 0;
+
+             // Loop through all patients to find the highest valid ID
+             Object.keys(patients).forEach((key) => {
+                 const patientId = patients[key].PatientId;
+
+                 // Ensure the ID starts with 'P' and the rest is a number
+                 if (patientId && patientId.startsWith('P')) {
+                     const numPart = parseInt(patientId.slice(1), 10); // Get numeric part after 'P'
+
+                     if (!isNaN(numPart) && numPart > lastId) {
+                         lastId = numPart;
+                     }
+                 } else {
+                     console.warn(`Invalid PatientId format: ${patientId}`);
+                 }
+             });
+
+             // Increment the highest found ID
+             const newId = `P${String(lastId + 1).padStart(2, '0')}`; // E.g., P01, P02, etc.
+             return newId;
+         } else {
+             // If no patients exist, start with P01
+             return 'P01';
+         }
+     }).catch((error) => {
+         console.error("Error generating patient ID:", error);
+         throw error;
+     });
+ }
+ let generatedPatientId = '';
+
+ function addPatientData() {
+     generatePatientId().then((patientId) => {
+         // Store the generated patient ID in the variable
+         generatedPatientId = patientId;
+
+         // Add patient data using the generated patient ID
+         set(ref(db, 'PatientSet/' + generatePatientId.value), {
+             PatientId: generatedPatientId,  // Use the stored patientId here
+             nameofpatient: patientName.value,
+             ageofpatient: Number(patientAge.value),
+             genderofpatient: patientGender.value,
+             dateofcheckin: patientDate.value,
+             bedofpatient: patientBed.value,
+             emailofpatient: patientEmail.value,
+             phoneofpatient: patientPhone.value,
+             bloodofpatient: bloodGroup.value,
+             aadharofpatient: Number(patientUID.value),
+             addressofpatient: address.value
+         }).then(() => {
+             alert("Patient data added successfully");
+         }).catch((error) => {
+             alert("Error adding patient data.");
+             console.error(error);
+         });
+     });
+ }*
+
+// Event Listener for Submit Button
+submitBtn.addEventListener('click', function (event) {
+ event.preventDefault();
+ checkAndAddPatient();
+});
+
+// Function to check if patient already exists by PatientId
+function checkAndAddPatient() {
+ generatePatientId().then((patientId) => {
+     const dbRef = ref(db);
+     get(child(dbRef, 'PatientSet/' + patientId)).then((snapshot) => {
+         if (snapshot.exists()) {
+             alert("Patient already exists, duplicates not allowed");
+         } else {
+             // Add patient data using generated PatientId
+             addPatientData(patientId);
+         }
+     }).catch((error) => {
+         alert("Error checking patient data.");
+         console.error(error);
+     });
+ });
+}
+
+// Function to generate new patient ID
+function generatePatientId() {
+ const patientSetRef = ref(db, 'PatientSet');
+
+ return get(patientSetRef).then((snapshot) => {
+     if (snapshot.exists()) {
+         const patients = snapshot.val();
+         let lastId = 0;
+
+         // Loop through all patients to find the highest valid ID
+         Object.keys(patients).forEach((key) => {
+             const patientId = patients[key].PatientId;
+
+             // Ensure the ID starts with 'P' and the rest is a number
+             if (patientId && patientId.startsWith('P')) {
+                 const numPart = parseInt(patientId.slice(1), 10); // Get numeric part after 'P'
+
+                 if (!isNaN(numPart) && numPart > lastId) {
+                     lastId = numPart;
+                 }
+             } else {
+                 console.warn(`Invalid PatientId format: ${patientId}`);
+             }
+         });
+
+         // Increment the highest found ID
+         const newId = `P${String(lastId + 1).padStart(2, '0')}`; // E.g., P01, P02, etc.
+         return newId;
+     } else {
+         // If no patients exist, start with P01
+         return 'P01';
+     }
+ }).catch((error) => {
+     console.error("Error generating patient ID:", error);
+     throw error;
+ });
+}
+
+// Function to add patient data using the generated PatientId
+function addPatientData(patientId) {
+ set(ref(db, 'PatientSet/' + patientId), {
+     PatientId: patientId,
+     nameofpatient: patientName.value,
+     ageofpatient: Number(patientAge.value),
+     genderofpatient: patientGender.value,
+     dateofcheckin: patientDate.value,
+     bedofpatient: patientBed.value,
+     emailofpatient: patientEmail.value,
+     phoneofpatient: patientPhone.value,
+     bloodofpatient: bloodGroup.value,
+     aadharofpatient: Number(patientUID.value),
+     addressofpatient: address.value
+ }).then(() => {
+     alert("Patient data added successfully");
+ }).catch((error) => {
+     alert("Error adding patient data.");
+     console.error(error);
+ });
+}
+
+
+ // Function to generate new patient ID
+ /*function generatePatientId() {
+     const patientSetRef = ref(db, 'PatientSet');
+ 
+     return get(patientSetRef).then((snapshot) => {
+         if (snapshot.exists()) {
+             const patients = snapshot.val();
+             let lastId = 0;
+ 
+             // Loop through all patients and find the highest ID
+             Object.keys(patients).forEach((key) => {
+                 const patientId = patients[key].PatientId;
+                 const numPart = parseInt(patientId.replace('P', ''), 10);
+                 if (numPart > lastId) {
+                     lastId = numPart;
+                 }
+             });
+ 
+             // Increment the highest ID
+             const newId = `P${String(lastId + 1).padStart(2, '0')}`;
+             return newId;
+         } else {
+             // Start with P01 if no patients exist
+             return 'P01';
+         }
+     }).catch((error) => {
+         console.error("Error generating patient ID:", error);
+         throw error;
+     });
+ }
+ */

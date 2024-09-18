@@ -1,4 +1,5 @@
 <?php
+phpinfo();
 // Database connection (adjust these values according to your database configuration)
 $servername = "localhost";
 $username = "root"; // Replace with your DB username
@@ -15,22 +16,31 @@ if ($conn->connect_error) {
 
 // Start session to get the username
 session_start();
-$user = $_SESSION['username']; // Assuming username is stored in session
 
-// SQL query to fetch the hospital_name for the particular username
-$sql = "SELECT hospital_name FROM users WHERE username = ?";
-$stmt = $conn->prepare($sql);
-$stmt->bind_param("s", $user);
-$stmt->execute();
-$stmt->bind_result($hospital_name);
-$stmt->fetch();
-$stmt->close();
-$conn->close();
+if (isset($_SESSION['user_name'])) {
+    $user = $_SESSION['user_name']; // Username stored in session
 
-// Return the hospital name as JSON
-header('Content-Type: application/json');
-echo json_encode(['hospital_name' => $hospital_name]);
+    // SQL query to fetch the hospital_name for the particular username
+    $sql = "SELECT hospital_name FROM reception WHERE user_name = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("s", $user);
+    $stmt->execute();
+    $stmt->bind_result($hospital_name);
+    $stmt->fetch();
+    $stmt->close();
+    $conn->close();
+
+    // Return the hospital name as JSON
+    header('Content-Type: application/json');
+    echo json_encode(['hospital_name' => $hospital_name]);
+} else {
+    // If no session is active or user_name is not set
+    echo json_encode(['error' => 'User not logged in']);
+    
+}
+session_destroy();
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -108,7 +118,7 @@ echo json_encode(['hospital_name' => $hospital_name]);
                             </a>
                         </li>
                         <li>
-                            <a href="addbed.html">
+                            <a href="addbed.php">
                                 <i class="fa-solid fa-bed"></i>
                                 <span class="show-item">Bed records</span>
                             </a>

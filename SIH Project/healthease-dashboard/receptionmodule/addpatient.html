@@ -127,7 +127,7 @@
                 <div class="health-ease">
                     <i class="fa-regular fa-hospital me-xl-10 he-icon"></i>
                     E-Hospital
-                    
+
                 </div>
 
 
@@ -304,182 +304,129 @@
     <!-- main js  -->
     <script src="../assets/js/main.js"></script>
 </body>
-
-
-
 <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.13.1/firebase-app.js";
     import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.13.1/firebase-analytics.js";
+    import { getDatabase, ref, child, get, set, update, remove } from "https://www.gstatic.com/firebasejs/10.13.1/firebase-database.js";
+    import { getStorage, ref as sRef, uploadBytesResumable, getDownloadURL } from "https://www.gstatic.com/firebasejs/10.13.1/firebase-storage.js";
+
+    // Firebase configuration
     const firebaseConfig = {
-      apiKey: "AIzaSyDKceH3hO3Ql75wCt8iu6xsXLjik4Q7NWY",
-      authDomain: "digi-hospital-3d6d5.firebaseapp.com",
-      databaseURL: "https://digi-hospital-3d6d5-default-rtdb.firebaseio.com",
-      projectId: "digi-hospital-3d6d5",
-      storageBucket: "digi-hospital-3d6d5.appspot.com",
-      messagingSenderId: "26240398543",
-      appId: "1:26240398543:web:70f082766624ec1a5173ba",
-      measurementId: "G-V9FVMK3MC4"
+        apiKey: "AIzaSyCgnX1Jce-Or-XLXtn0JTEmDgWaW8uwFvk",
+        authDomain: "ehospital-f4db4.firebaseapp.com",
+        databaseURL: "https://ehospital-f4db4-default-rtdb.firebaseio.com",
+        projectId: "ehospital-f4db4",
+        storageBucket: "ehospital-f4db4.appspot.com",
+        messagingSenderId: "536685497139",
+        appId: "1:536685497139:web:1475c7f324ae487fa10c46"
     };
-  
+
     // Initialize Firebase
     const app = initializeApp(firebaseConfig);
     const analytics = getAnalytics(app);
 
-    import { getDatabase, ref, child, get, set, update, remove } from "https://www.gstatic.com/firebasejs/10.13.1/firebase-database.js";
-    import { getStorage, ref as sRef, uploadBytesResumable, getDownloadURL } from "https://www.gstatic.com/firebasejs/10.13.1/firebase-storage.js";
-
+    // Initialize Database
     const db = getDatabase();
 
-    //for patient image
-    var files = [];
-    var reader = new FileReader();
-
-    var input = document.createElement('input');
-    input.type = 'file';
-
-    input.onchange = e => {
-        files = e, target.files;
-
-        reader.readAsDataURL(files[0]);
-    }
-
-    reader.onload = function () {
-        myimg.src = reader.result;
-    }
-
-    //selection//
-
-
-
-    //all the imput fields
-    let Patientnme = document.getElementById('Patientnme');
-    let Patientage = document.getElementById('Patientage');
-    let Patientgender = document.getElementById('Patientgender');
-    let Patientbed = document.getElementById('patientbed');
-    let Patientdate = document.getElementById('Patientdate');
-    let Patientmail = document.getElementById('Patientmail');
-    let Patientphone = document.getElementById('Patientphone');
-    let Blood_group = document.getElementById('Blood-group');
-    let Patientuidi = document.getElementById('Patientuidi');
+    // Input fields
+    let patientName = document.getElementById('Patientnme');
+    let patientAge = document.getElementById('Patientage');
+    let patientGender = document.getElementById('Patientgender');
+    let patientBed = document.getElementById('patientbed');
+    let patientDate = document.getElementById('Patientdate');
+    let patientEmail = document.getElementById('Patientmail');
+    let patientPhone = document.getElementById('Patientphone');
+    let bloodGroup = document.getElementById('Blood-group');
+    let patientUID = document.getElementById('Patientuidi');
     let address = document.getElementById('address');
 
-    //the buttons
-    let submitbtn = document.getElementById('submitbtn');
+    // Button
+    let submitBtn = document.getElementById('submitbtn');
+    
 
+// Event Listener for Submit Button
+submitBtn.addEventListener('click', function (event) {
+    event.preventDefault();
+    checkAndAddPatient();
+});
 
-
-    function Interface(e) {
-        let BtnId = e.target.id;
+// Function to check if patient already exists by PatientId
+function checkAndAddPatient() {
+    generatePatientId().then((patientId) => {
         const dbRef = ref(db);
-        if (BtnId == "RetBtn") {
-            RetData();
-            return;
-        }
-
-        get(child(dbRef, 'PatientSet/' + Patientphone.value)).then((snapshot) => {
+        get(child(dbRef, 'PatientSet/' + patientId)).then((snapshot) => {
             if (snapshot.exists()) {
-                if (BtnId == "submitbtn")
-                    alert("Employee already exists, duplicates not allowed");
-                /*
-                                else if (BtnId == "#")
-                                    UpdateData();
-                
-                                else if (BtnId == "#")
-                                    DeleteData();
-                */
+                alert("Patient already exists, duplicates not allowed");
+            } else {
+                // Add patient data using generated PatientId
+                addPatientData(patientId);
             }
-            else {
-                if (BtnId == "submitbtn")
-                    AddData();
-                /*
-                                else if (BtnId == "#")
-                                    alert("Cannot Update Employee Does not exist");
-                
-                                else if (BtnId == "#")
-                                    alert("Cannot Delete Employee Does not exist");
-                */
-            }
-        })
-            .catch((error) => {
-                alert("Unsuccessful");
-                console.log(error);
-            })
+        }).catch((error) => {
+            alert("Error checking patient data.");
+            console.error(error);
+        });
+    });
+}
 
+// Function to generate new patient ID
+function generatePatientId() {
+    const patientSetRef = ref(db, 'PatientSet');
 
+    return get(patientSetRef).then((snapshot) => {
+        if (snapshot.exists()) {
+            const patients = snapshot.val();
+            let lastId = 0;
 
-    }
+            // Loop through all patients to find the highest valid ID
+            Object.keys(patients).forEach((key) => {
+                const patientId = patients[key].PatientId;
 
-    function AddData() {
-        set(ref(db, 'PatientSet/' + Patientuidi.value), {
-            nameofpatient: Patientnme.value,
-            ageofpatient: Number(Patientage.value),
-            genderofpatient: Patientgender.value,
-            dateofcheckin: Patientdate.value,
-            bedofpatient: Patientbed.value,
-            emailofpatient: Patientmail.value,
-            phoneofpatient: Patientphone.value,
-            bloodofpatient: Blood_group.value,
-            aadharofpatient: Number(Patientuidi.value),
-            addressofpatient: address.value
+                // Ensure the ID starts with 'P' and the rest is a number
+                if (patientId && patientId.startsWith('P')) {
+                    const numPart = parseInt(patientId.slice(1), 10); // Get numeric part after 'P'
 
-        }).then(() => {
-            alert("Data Added Successfully");
-        })
-            .catch((error) => {
-                alert("Unsuccessful");
-                console.log(error);
-            })
-    }
-    /*
-        function RetData() {
-            const dbRef = ref(db);
-    
-            get(child(dbRef, 'EmployeeSet/' + RollnoInp.value)).then((snapshot) => {
-                if (snapshot.exists()) {
-                    FnameInp.value = snapshot.val().nameofemployee.firstname;
-                    LnameInp.value = snapshot.val().nameofemployee.lastname;
-                    DeptInp.value = snapshot.val().department;
-                    SwimInp.value = (snapshot.val().canswim) ? "yes" : "no";
+                    if (!isNaN(numPart) && numPart > lastId) {
+                        lastId = numPart;
+                    }
+                } else {
+                    console.warn(`Invalid PatientId format: ${patientId}`);
                 }
-                else {
-                    alert("Employee does not exist");
-                }
-            })
-                .catch((error) => {
-                    alert("Unsuccessful");
-                    console.log(error);
-                })
-        }
-    
-        function UpdateData() {
-            update(ref(db, 'EmployeeSet/' + RollnoInp.value), {
-                nameofemployee: { firstname: FnameInp.value, lastname: LnameInp.value },
-                department: DeptInp.value,
-                canswim: (SwimInp.value == "yes")
-            }).then(() => {
-                alert("Data Updated Successfully");
-            })
-                .catch((error) => {
-                    alert("Unsuccessful");
-                    console.log(error);
-                })
-        }
-    
-        function DeleteData() {
-            remove(ref(db, 'EmployeeSet/' + RollnoInp.value),)
-                .then(() => {
-                    alert("Data Deleted Successfully");
-                })
-                .catch((error) => {
-                    alert("Unsuccessful");
-                    console.log(error);
-                })
-        }
-    
-    */
+            });
 
+            // Increment the highest found ID
+            const newId = `P${String(lastId + 1).padStart(2, '0')}`; // E.g., P01, P02, etc.
+            return newId;
+        } else {
+            // If no patients exist, start with P01
+            return 'P01';
+        }
+    }).catch((error) => {
+        console.error("Error generating patient ID:", error);
+        throw error;
+    });
+}
 
-    submitbtn.addEventListener('click', Interface);
+// Function to add patient data using the generated PatientId
+function addPatientData(patientId) {
+    set(ref(db, 'PatientSet/' + patientId), {
+        PatientId: patientId,
+        nameofpatient: patientName.value,
+        ageofpatient: Number(patientAge.value),
+        genderofpatient: patientGender.value,
+        dateofcheckin: patientDate.value,
+        bedofpatient: patientBed.value,
+        emailofpatient: patientEmail.value,
+        phoneofpatient: patientPhone.value,
+        bloodofpatient: bloodGroup.value,
+        aadharofpatient: Number(patientUID.value),
+        addressofpatient: address.value
+    }).then(() => {
+        alert("Patient data added successfully");
+    }).catch((error) => {
+        alert("Error adding patient data.");
+        console.error(error);
+    });
+}
 
 
 </script>
