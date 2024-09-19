@@ -8,19 +8,21 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     //something was posted
     $user_name = $_POST['user_name'];
     $password = $_POST['pass_word'];
+    $hospital_name = $_POST['hospital_name'];
 
     if (!empty($user_name) && !empty($password) && !is_numeric($user_name)) {
 
         // Escape inputs to prevent SQL injection
         $user_name = mysqli_real_escape_string($con, $user_name);
         $password = mysqli_real_escape_string($con, $password);
+        $hospital_name = mysqli_real_escape_string($con, $hospital_name);
 
         // Hash the password before storing it
         $hashed_password = password_hash($password, PASSWORD_BCRYPT);
 
         // Save to database
         $user_id = random_num(20);
-        $query = "INSERT INTO reception (user_id, user_name, password) VALUES ('$user_id', '$user_name', '$hashed_password')";
+        $query = "INSERT INTO reception (user_id, user_name, password,hospital_name) VALUES ('$user_id', '$user_name', '$hashed_password','$hospital_name')";
 
         if (mysqli_query($con, $query)) {
             // Redirect to login page after successful registration
@@ -84,7 +86,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                     <form action="#" id="mainform" method="post">
                         <div class="mb-20">
                             <label class="mb-3 d-block para-1b fw-medium">Hospital:</label>
-                            <input id="HospitalINP" type="text" name="user_name" class="login-input" placeholder="Your Hospital...">
+                            <input id="HospitalINP" type="text" name="hospital_name" class="login-input" placeholder="Your Hospital...">
                         </div>
                         <div class="mb-20">
                             <label class="mb-3 d-block para-1b fw-medium">Username:</label>
