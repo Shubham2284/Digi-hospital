@@ -190,12 +190,13 @@
                                     <label class="mb-10 fw-semibold">Gender</label>
                                     <div class="form-input-box">
                                         <i class="fa-solid fa-restroom form-icon"></i>
-                                        <select id="Patientgender" class="wide">
+                                        <!--<select id="Patientgender" class="wide">
                                             <option value="0">Select</option>
                                             <option value="male">Male</option>
                                             <option value="female">Female</option>
                                             <option value="other">Other</option>
-                                        </select>
+                                        </select>-->
+                                        <input type="text" name="Patientgender" id="Patientgender" placeholder="Gender">
                                     </div>
                                 </div>
 
@@ -228,7 +229,7 @@
                                     <label class="mb-10 fw-semibold">Blood Group</label>
                                     <div class="form-input-box">
                                         <i class="fa-solid fa-heart-pulse form-icon"></i>
-                                        <select id="Blood-group" class="wide">
+                                       <!-- <select id="patientblood" class="wide">
                                             <option value="0">Select</option>
                                             <option value="A+">A+</option>
                                             <option value="A-">A-</option>
@@ -238,7 +239,8 @@
                                             <option value="AB">AB-</option>
                                             <option value="O+">O+</option>
                                             <option value="O-">O-</option>
-                                        </select>
+                                        </select>-->
+                                        <input type="text" name="patientblood" id="patientblood" placeholder="Blood Group">
                                     </div>
                                 </div>
 
@@ -303,99 +305,108 @@
 </body>
 
 <script type="module">
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.13.1/firebase-app.js";
-    import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.13.1/firebase-analytics.js";
-    import { getDatabase, ref, child, get, set, update, remove } from "https://www.gstatic.com/firebasejs/10.13.1/firebase-database.js";
-    import { getStorage, ref as sRef, uploadBytesResumable, getDownloadURL } from "https://www.gstatic.com/firebasejs/10.13.1/firebase-storage.js";
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.13.1/firebase-app.js";
+import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.13.1/firebase-analytics.js";
+import { getDatabase, ref, child, get, set, update, remove } from "https://www.gstatic.com/firebasejs/10.13.1/firebase-database.js";
+import { getStorage, ref as sRef, uploadBytesResumable, getDownloadURL } from "https://www.gstatic.com/firebasejs/10.13.1/firebase-storage.js";
 
-    // Firebase configuration
-    const firebaseConfig = {
-        apiKey: "AIzaSyCgnX1Jce-Or-XLXtn0JTEmDgWaW8uwFvk",
-        authDomain: "ehospital-f4db4.firebaseapp.com",
-        databaseURL: "https://ehospital-f4db4-default-rtdb.firebaseio.com",
-        projectId: "ehospital-f4db4",
-        storageBucket: "ehospital-f4db4.appspot.com",
-        messagingSenderId: "536685497139",
-        appId: "1:536685497139:web:1475c7f324ae487fa10c46"
-    };
+// Firebase configuration
+const firebaseConfig = {
+    apiKey: "AIzaSyCgnX1Jce-Or-XLXtn0JTEmDgWaW8uwFvk",
+    authDomain: "ehospital-f4db4.firebaseapp.com",
+    databaseURL: "https://ehospital-f4db4-default-rtdb.firebaseio.com",
+    projectId: "ehospital-f4db4",
+    storageBucket: "ehospital-f4db4.appspot.com",
+    messagingSenderId: "536685497139",
+    appId: "1:536685497139:web:1475c7f324ae487fa10c46"
+};
 
-    // Initialize Firebase
-    const app = initializeApp(firebaseConfig);
-    const analytics = getAnalytics(app);
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+const analytics = getAnalytics(app);
 
-    // Initialize Database
-    const db = getDatabase();
+// Initialize Database
+const db = getDatabase();
 
-    //all the imput fields
-    let Patientnme = document.getElementById('Patientnme');
-    let Patientage = document.getElementById('Patientage');
-    let Patientgender = document.getElementById('Patientgender');
-    let Patientdate = document.getElementById('Patientdate');
-    let Patientmail = document.getElementById('Patientmail');
-    let Patientphone = document.getElementById('Patientphone');
-    let Blood_group = document.getElementById('Blood-group');
-    let Patientuidi = document.getElementById('Patientuidi');
-    let address = document.getElementById('address');
+// Input fields
+let PatientId = document.getElementById('patientId');
+let Patientnme = document.getElementById('Patientnme');
+let Patientage = document.getElementById('Patientage');
+let Patientgender = document.getElementById('Patientgender');
+let Patientdate = document.getElementById('Patientdate');
+let Patientmail = document.getElementById('Patientmail');
+let Patientphone = document.getElementById('Patientphone');
+let BloodGroup = document.getElementById('patientblood');  // Renamed for consistency
+let Patientuidi = document.getElementById('Patientuidi');
+let address = document.getElementById('address');
 
-    //the buttons
-    let submitbtn = document.getElementById('subbtn');
-    let retrivebtn = document.getElementById('retbtn');
+// Buttons
+let submitbtn = document.getElementById('subbtn');
+let retrivebtn = document.getElementById('retbtn');
 
+function Interface(e) {
+    let BtnId = e.target.id;
+    if (BtnId === "retbtn") {
+        RetData();
+    } else if (BtnId === "subbtn") {
+        UpdateData();
+    }
+}
 
+submitbtn.addEventListener('click', Interface);
+retrivebtn.addEventListener('click', Interface);
 
-    function Interface(e) {
-        let BtnId = e.target.id;
-        if (BtnId === "retbtn") {
-            RetData();
-        } else if (BtnId === "subbtn") {
-            UpdateData();
+function RetData() {
+    if (!PatientId.value) {
+        alert("Please enter a Patient ID");
+        return;
+    }
+    
+    const dbRef = ref(db);
+    get(child(dbRef, 'PatientSet/' + PatientId.value)).then((snapshot) => {
+        if (snapshot.exists()) {
+            // Populate form with patient data
+            Patientnme.value = snapshot.val().nameofpatient || '';
+            Patientage.value = snapshot.val().ageofpatient || '';
+            Patientgender.value = snapshot.val().genderofpatient || '';
+            Patientdate.value = snapshot.val().dateofcheckin || '';
+            Patientmail.value = snapshot.val().emailofpatient || '';
+            BloodGroup.value = snapshot.val().bloodofpatient || '';
+            Patientuidi.value = snapshot.val().aadharofpatient || '';
+            Patientphone.value = snapshot.val().phoneofpatient || '';
+            address.value = snapshot.val().addressofpatient || '';
+        } else {
+            alert("Patient does not exist");
         }
+    }).catch((error) => {
+        alert("Error retrieving data");
+        console.log(error);
+    });
+}
+
+function UpdateData() {
+    if (!PatientId.value) {
+        alert("Please enter a Patient ID");
+        return;
     }
 
-    submitbtn.addEventListener('click', Interface);
-    retrivebtn.addEventListener('click', Interface);
-
-    function RetData() {
-        const dbRef = ref(db);
-
-        get(child(dbRef, 'PatientSet/' + Patientphone.value)).then((snapshot) => {
-            if (snapshot.exists()) {
-                // Populate form with patient data
-                Patientnme.value = snapshot.val().nameofpatient;
-                Patientage.value = snapshot.val().ageofpatient;
-                Patientgender.value = snapshot.val().genderofpatient;
-                Patientdate.value = snapshot.val().dateofcheckin;
-                Patientmail.value = snapshot.val().emailofpatient;
-                Blood_group.value = snapshot.val().bloodofpatient;
-                Patientuidi.value = snapshot.val().aadharofpatient;
-                address.value = snapshot.val().addressofpatient;
-            } else {
-                alert("Patient does not exist");
-            }
-        }).catch((error) => {
-            alert("Error retrieving data");
-            console.log(error);
-        });
-    }
-
-
-    function UpdateData() {
-        update(ref(db, 'PatientSet/' + Patientphone.value), {
-            nameofpatient: Patientnme.value,
-            ageofpatient: Number(Patientage.value),
-            genderofpatient: Patientgender.value,
-            dateofcheckin: Patientdate.value,
-            emailofpatient: Patientmail.value,
-            bloodofpatient: Blood_group.value,
-            aadharofpatient: Number(Patientuidi.value),
-            addressofpatient: address.value
-        }).then(() => {
-            alert("Patient data updated successfully");
-        }).catch((error) => {
-            alert("Error updating data");
-            console.log(error);
-        });
-    }
+    update(ref(db, 'PatientSet/' + PatientId.value), {
+        nameofpatient: Patientnme.value,
+        ageofpatient: Number(Patientage.value),
+        genderofpatient: Patientgender.value,
+        dateofcheckin: Patientdate.value,
+        emailofpatient: Patientmail.value,
+        bloodofpatient: BloodGroup.value,
+        aadharofpatient: Number(Patientuidi.value),
+        addressofpatient: address.value,
+        phoneofpatient : Number(Patientphone.value)
+    }).then(() => {
+        alert("Patient data updated successfully");
+    }).catch((error) => {
+        alert("Error updating data");
+        console.log(error);
+    });
+}
 
 
 
