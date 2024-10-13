@@ -191,6 +191,7 @@
                     <table class="list-table" id="itemTable">
                         <thead>
                             <th>Patient Id</th>
+                            <th>Bed type</th>
                             <th>Patient Name</th>
                             <th>Age</th>
                             <th>gender</th>
@@ -199,9 +200,7 @@
                             <th>Aadhar number</th>
                             <th>Blood Group</th>
                             <th>Address</th>
-                            <!--<th>Bed Type</th>-->
                             <th>Checkin date</th>
-                            <th>bedData</th>
                         </thead>
                         <tbody id="patientData">
 
@@ -281,6 +280,7 @@
                             // Create a new row in the table for each patient
                             const row = `<tr>
                                 <td>${patient.PatientId}</td>
+                                <td>${patient.bedofpatient}</td>
                                 <td>${patient.nameofpatient}</td>
                                 <td>${patient.ageofpatient}</td>
                                 <td>${patient.genderofpatient}</td>
@@ -290,7 +290,6 @@
                                 <td>${patient.bloodofpatient}</td>
                                 <td>${patient.addressofpatient}</td>
                                 <td>${patient.dateofcheckin}</td>
-                                <td>${bedData.bedId}</td>
                             </tr>`;
                             tableBody.innerHTML += row;
                         }).catch((error) => {
