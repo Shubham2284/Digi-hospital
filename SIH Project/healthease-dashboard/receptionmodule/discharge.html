@@ -263,24 +263,24 @@
     <!-- main js  -->
     <script src="../assets/js/main.js"></script>
     <script type="module">
-       import { initializeApp } from "https://www.gstatic.com/firebasejs/10.13.1/firebase-app.js";
-import { getDatabase, ref, child, get, update } from "https://www.gstatic.com/firebasejs/10.13.1/firebase-database.js";
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.13.1/firebase-app.js";
+        import { getDatabase, ref, child, get, update } from "https://www.gstatic.com/firebasejs/10.13.1/firebase-database.js";
 
-// Firebase configuration
-const firebaseConfig = {
-    apiKey: "AIzaSyCgnX1Jce-Or-XLXtn0JTEmDgWaW8uwFvk",
-    authDomain: "ehospital-f4db4.firebaseapp.com",
-    databaseURL: "https://ehospital-f4db4-default-rtdb.firebaseio.com",
-    projectId: "ehospital-f4db4",
-    storageBucket: "ehospital-f4db4.appspot.com",
-    messagingSenderId: "536685497139",
-    appId: "1:536685497139:web:1475c7f324ae487fa10c46"
-};
+        // Firebase configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyCkHu9Zh2ctmOtuAp93t2HSAPa1eU3_Bek",
+            authDomain: "digi-hospital-ff828.firebaseapp.com",
+            databaseURL: "https://digi-hospital-ff828-default-rtdb.firebaseio.com",
+            projectId: "digi-hospital-ff828",
+            storageBucket: "digi-hospital-ff828.appspot.com",
+            messagingSenderId: "626957036552",
+            appId: "1:626957036552:web:9a3b9311d4dbff25a035bd",
+            measurementId: "G-KL0SY6G8J6"
+        };
 
-// Initialize Firebase
-const app = initializeApp(firebaseConfig);
-const db = getDatabase();
-
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const db = getDatabase();
 // Function to retrieve data
 function retrievePatientData() {
     const dbRef = ref(db);
@@ -330,7 +330,12 @@ function dischargePatient(patientId, bedId) {
 
     // Check if bedId exists to avoid updating a null bed
     if (bedId) {
+        // Update bed status to 'not allocated' in BedSet
         updates[`BedSet/${bedId}/status`] = 'not allocated';
+
+        // Update the bed allocation status in AllocationSet (if needed)
+        updates[`AllocationSet/${bedId}/allocatedTo`] = null;
+        updates[`AllocationSet/${bedId}/allocationStatus`] = 'not allocated';
     } else {
         console.error("No bedId found for patient:", patientId);
     }
@@ -348,14 +353,6 @@ function dischargePatient(patientId, bedId) {
 
 // Call the function when the page loads
 window.onload = retrievePatientData;
-const connectedRef = ref(db, ".info/connected");
-onValue(connectedRef, (snap) => {
-  if (snap.val() === true) {
-    console.log("Connected to Firebase");
-  } else {
-    console.log("Not connected to Firebase");
-  }
-});
 
     </script>
 
