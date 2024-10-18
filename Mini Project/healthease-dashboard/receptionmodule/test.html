@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Medical Devices List</title>
+    <link rel="stylesheet" href="styles.css"> <!-- Optional: Link to your CSS file for styling -->
+    <script type="module" src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js"></script>
+    <script type="module" src="https://www.gstatic.com/firebasejs/10.14.1/firebase-database.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        .container {
+            max-width: 1200px;
+            margin: auto;
+            padding: 20px;
+            background: #fff;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        tr:hover {
+            background-color: #f1f1f1;
+        }
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 60px;
+            height: 34px;
+        }
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            transition: .4s;
+        }
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 26px;
+            width: 26px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            transition: .4s;
+        }
+        input:checked + .slider {
+            background-color: #2196F3;
+        }
+        input:checked + .slider:before {
+            transform: translateX(26px);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Medical Devices List</h1>
+        <table id="devicesTable">
+            <thead>
+                <tr>
+                    <th>Device ID</th>
+                    <th>Name</th>
+                    <th>Model No</th>
+                    <th>Serial No</th>
+                    <th>Purchase Date</th>
+                    <th>Last Maintenance Date</th>
+                    <th>Next Maintenance Due</th>
+                    <th>Location</th>
+                    <th>Status</th> <!-- New Status Header -->
+                </tr>
+            </thead>
+            <tbody id="devicesBody">
+                <!-- Device data will be injected here -->
+            </tbody>
+        </table>
+    </div>
+
+    <script type="module">
+        // Import the functions you need from the SDKs you need
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js";
+        import { getDatabase, ref, get } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-database.js";
+
+        // Your web app's Firebase configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyBHRUZUWJ8VMUZB1_6QzyEybUGA9-4yCPo",
+            authDomain: "sihmini.firebaseapp.com",
+            databaseURL: "https://sihmini-default-rtdb.firebaseio.com",
+            projectId: "sihmini",
+            storageBucket: "sihmini.appspot.com",
+            messagingSenderId: "708647015793",
+            appId: "1:708647015793:web:38abca2ee51b87d82212d0"
+        };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const database = getDatabase(app);
+
+        // Function to fetch and display device data
+        async function fetchDeviceData() {
+            const devicesRef = ref(database, 'devices');
+            const snapshot = await get(devicesRef);
+            if (snapshot.exists()) {
+                const devices = snapshot.val();
+                const devicesBody = document.getElementById('devicesBody');
+                devicesBody.innerHTML = ''; // Clear the table body before adding data
+
+                // Loop through devices and create rows
+                for (const deviceId in devices) {
+                    const device = devices[deviceId];
+                    const row = document.createElement('tr');
+                    row.innerHTML = `
+                        <td>${deviceId}</td>
+                        <td>${device.name}</td>
+                        <td>${device.modelNo}</td>
+                        <td>${device.serialNo}</td>
+                        <td>${device.purchaseDate}</td>
+                        <td>${device.lastMaintenanceDate}</td>
+                        <td>${device.nextMaintenanceDue}</td>
+                        <td>${device.location}</td>
+                        <td class="d-center gap-10 justify-content-start">
+                            <span class="tpc-2">Active</span>
+                            <label class="switch">
+                                <input type="checkbox" ${device.active ? 'checked' : ''} onchange="toggleDeviceStatus('${deviceId}')">
+                                <span class="slider"></span>
+                            </label>
+                            <span class="tsc-1">Deactivate</span>
+                        </td>
+                    `;
+                    devicesBody.appendChild(row);
+                }
+            } else {
+                console.log("No data available");
+            }
+        }
+
+        // Toggle device status function
+        function toggleDeviceStatus(deviceId) {
+            const checkbox = event.target; // Get the checkbox that triggered the event
+            const isActive = checkbox.checked; // Check if it's checked
+
+            // Here you would normally update the status in Firebase
+            console.log(`Device ${deviceId} is now ${isActive ? 'Active' : 'Inactive'}`);
+            // Example of updating the database (uncomment when ready)
+            // const deviceRef = ref(database, `devices/${deviceId}/active`);
+            // set(deviceRef, isActive);
+        }
+
+        // Fetch device data when the page loads
+        window.onload = fetchDeviceData;
+    </script>
+</body>
+</html>

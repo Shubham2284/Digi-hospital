@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="../assets/img/logo.png" type="image/x-icon">
+    <title>Admin Patient | HealthEase </title>
+    <!--Font awesome stylesheet-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+        integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- bootstrap stylesheet -->
+    <link rel="stylesheet" href="../assets/css/customizeBootstrap.css">
+    <!-- css stylesheet -->
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <style>
+        /* Horizontal scrolling for the table */
+        .table-wrapper {
+            overflow-x: auto;
+        }
+
+        .list-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .list-table th,
+        .list-table td {
+            padding: 12px;
+            border: 1px solid #ccc;
+            text-align: left;
+        }
+
+        /* Ensure table header sticks on wide screens */
+        .list-table thead th {
+            background-color: #f1f1f1;
+            position: sticky;
+            top: 0;
+        }
+    </style>
+</head>
+
+<body class="body-bg">
+
+    <!-- main body  -->
+
+    <!-- preloader  -->
+    <div id='preloader'>
+        <svg id='loader-1' height='210' width='550' xmlns='http://www.w3.org/2000/svg'
+            xmlns:xlink='http://www.w3.org/1999/xlink'>
+            <path id='loader-2' stroke='#DE6262' fill='none' stroke-width='2' stroke-linejoin='round'
+                d='M0,90L250,90Q257,60 262,87T267,95 270,88 273,92t6,35 7,-60T290,127 297,107s2,-11 10,-10 1,1 8,-10T319,95c6,4 8,-6 10,-17s2,10 9,11h210' />
+        </svg>
+    </div>
+
+    <!-- sidebar start -->
+    <div class="sidebar">
+        <div class="sidebar-wrapper">
+            <div>
+                <i class="fa-solid fa-x hide-menubar" id="hide-menubar"></i>
+                <div class="p-xl-20 p-10 ">
+                    <div class="logo pb-20">
+                        <a class="d-flex align-items-center" href="doctordash.php">
+                            <img src="../assets/img/logo.png" alt="logo">
+                            <img class="ms-10 show-item lp-2" src="../assets/img/logo-body.png" alt="logo">
+                        </a>
+                    </div>
+                    <div class="py-20 bb-2 bt-1">
+                        <a class="sidebar-user" href="javascript:void(0)">
+                            <img class="rounded-circle" src="../assets/img/doctor.png" alt="admin">
+                            <span class="para-1b show-item ms-10">Mr. Doctor</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="side-menu">
+                    <ul>
+                        <li>
+                            <a href="receptiondash.php">
+                                <i class="fa-solid fa-gauge-high"></i>
+                                <span class="show-item">Dashboard</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="device.html">
+                                <i class="fa-solid fa-laptop-medical"></i>
+                                <span class="show-item">Device</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="doctor.html">
+                                <i class="fa-solid fa-laptop-medical"></i>
+                                <span class="show-item">Doctors</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="addbed.html">
+                                <i class="fa-solid fa-bed"></i>
+                                <span class="show-item">Bed records</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="patient.html">
+                                <i class="fa-solid fa-bed-pulse"></i>
+                                <span class="show-item"> Patient </span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="addpatient.html">
+                                <i class="fa-solid fa-bed-pulse"></i>
+                                <span class="show-item">Add-Patient</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="editpatient.html">
+                                <i class="fa-solid fa-bed-pulse"></i>
+                                <span class="show-item">Edit-Patient</span>
+                            </a>
+                        </li>
+                        <li class="active">
+                            <a href="#">
+                                <i class="fa-solid fa-file-prescription"></i>
+                                <span class="show-item">Discharge-Patient</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- sidebar end  -->
+
+    <!-- main content & top header start  -->
+    <main class="content-wrapper">
+
+        <!-- header section start  -->
+        <header>
+            <div class="d-flex align-items-center gap-xl-30 gap-3">
+
+                <button class="toggle-menu btn">
+                    <i class="fa-solid fa-bars-staggered"></i>
+                </button>
+
+                <a href="#" target="_blank">
+                    <i class="fa-solid fa-globe me-10"></i>
+                    <span class="fs-base header-item-hide">Go to website</span>
+                </a>
+            </div>
+
+            <div class="d-flex align-items-center gap-sm-4 gap-3">
+
+                <div class="health-ease">
+                    <i class="fa-regular fa-hospital me-xl-10 he-icon"></i>
+                    E-Hospital
+                </div>
+
+
+                <div class="account">
+                    <img class="me-xl-10" src="../assets/img/patient.png" alt="patient">
+                    Reception
+                </div>
+
+                <div class="language ">
+                    <img class="lang-flag header-item-hide" src="../assets/img/flag.png" alt="flag">
+                    IN
+                </div>
+            </div>
+        </header>
+        <!-- header section end  -->
+
+        <!-- content section start   -->
+        <div class="main-content">
+            <!-- main content start -->
+            <div>
+                <div class="page-title">
+                    <ul class="d-flex align-items-center gap-20">
+                        <h3 class="bed-h3">Total Number of Beds: <span id="totalBeds">0</span></h3>
+                        <h3 class="bed-h3">Remaining Beds: <span id="remainingBeds">0</span></h3>
+                        <li class="bc-item"><a class="para-1b" href="doctordash.php">Dashboard</a></li>
+                        <li class="bc-item">Discharge Patient</li>
+                    </ul>
+                </div>
+
+                <div class="list-body">
+                    <div class="list-title d-between bgnc-10 br-trl-sm px-30 py-3">
+                        <span class="heading-five">Patient List</span>
+                        <div class="d-between gap-30">
+                            <button class="btn-1 para-1b"> <i class="fa-solid fa-cloud-arrow-down"></i> Export</button>
+                            <button class="btn-1 para-1b" id="showFilter"> <i class="fa-solid fa-sliders"></i>
+                                Discharge</button>
+                        </div>
+                    </div>
+                    <!-- pop up filter box start -->
+                    <div class="filter-list bgnc-10 ">
+                        <div class="px-30 pt-3 pb-30">
+                            <form action="#" class="d-between gap-30 mb-30">
+                                <div class="w-100">
+                                    <label class="para-1b d-block tnc-1 mb-10">Name</label>
+                                    <input id="patientname" class="form-control px-xxl-30 py-xxl-20 p-lg-20 p-3"
+                                        type="text" placeholder="Your name">
+                                </div>
+                                <div class="w-100">
+                                    <label class="para-1b d-block tnc-1 mb-10">Patient ID</label>
+                                    <input class="form-control px-xxl-30 py-xxl-20 p-lg-20 p-3" type="text"
+                                        id="dischargePatientId" placeholder="Enter Patient ID or Aadhaar">
+
+                                </div>
+                                <div class="w-100">
+                                    <label class="para-1b d-block tnc-1 mb-10">Aadhar</label>
+                                    <input id="patientaadhar" class="form-control px-xxl-30 py-xxl-20 p-lg-20 p-3"
+                                        type="number" placeholder="Your number">
+                                </div>
+
+                            </form>
+                            <div class="w-100">
+                                <button class="btn-2" id="dischargeBtn">Discharge Patient</button>
+                                <button id="findbtn" class="btn-2">Find</button>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- pop up filter box end -->
+
+                    <!--Table Start-->
+
+                    <div class="table-wrapper">
+                        <table class="list-table" id="itemTable">
+                            <thead>
+                                <tr>
+                                    <th>Patient ID</th>
+                                    <th>Aadhar NO</th>
+                                    <th>Name</th>
+                                    <th>Age</th>
+                                    <th>Gender</th>
+                                    <th>Mobile NO</th>
+                                    <th>Address</th>
+                                    <th>Bed Type</th>
+                                    <th>Check-in Date</th>
+                                </tr>
+                            </thead>
+                            <tbody id="patientTableBody"></tbody>
+                        </table>
+                    </div>
+
+
+                    <!--Table End-->
+
+
+
+
+                    <!-- pagination start  -->
+                    <div class="list-footer d-between bgnc-10 br-brl-sm px-30 py-3">
+                        <span class="para-1b fs-base d-block">Showing 1 to 10 of 14 entries</span>
+                        <ul class="pagination-item">
+                            <li class="page-item">
+                                <a class="page-link" href="javascript:void(0)" aria-label="Previous">
+                                    <span aria-hidden="true"><i class="fa-solid fa-angles-left"></i></span>
+                                </a>
+                            </li>
+                            <li class="page-item "><a class="page-link" href="javascript:void(0)">1</a></li>
+                            <li class="page-item active"><a class="page-link" href="javascript:void(0)">2</a></li>
+                            <li class="page-item"><a class="page-link" href="javascript:void(0)">3</a></li>
+                            <li class="page-item">
+                                <a class="page-link" href="javascript:void(0)" aria-label="Next">
+                                    <span aria-hidden="true"><i class="fa-solid fa-angles-right"></i></span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                    <!-- pagination end  -->
+                </div>
+
+            </div>
+            <!-- main content end -->
+
+            <!-- footer start  -->
+            <footer>
+                <div class="container-fluid">
+                    <span class="para-1b fs-base text-center text-sm-start d-block ">Copyright © <span
+                            class="currentYear"></span> HealthEase Medical. All
+                        rights reserved.</span>
+                </div>
+            </footer>
+            <!-- footer end  -->
+        </div>
+        <!-- content section end   -->
+    </main>
+    <!-- main content & top header end  -->
+
+
+    <!-- jquery -->
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
+    <!-- jquery -->
+    <script src="../assets/js/plugin/jquery-3.7.0.min.js"></script>
+    <!-- bootstrap js  -->
+    <script src="../assets/js/plugin/bootstrap.min.js"></script>
+    <!-- nice select  -->
+    <script src="../assets/js/plugin/jquery.nice-select.min.js"></script>
+    <!-- chart js  -->
+    <script src="../assets/js/plugin/cdn.jsdelivr.net_npm_chart.js"></script>
+    <!-- plugin customize js  -->
+    <script src="../assets/js/pluginCustomization.js"></script>
+    <!-- main js  -->
+    <script src="../assets/js/main.js"></script>
+</body>
+
+
+
+<script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js";
+    import { getDatabase, ref, get, set, remove, child } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-database.js";
+
+    const firebaseConfig = {
+        apiKey: "AIzaSyDox-bH1UMvQvvzYhlx2T9R6felaN_O_sM",
+        authDomain: "miniproject-646ed.firebaseapp.com",
+        projectId: "miniproject-646ed",
+        storageBucket: "miniproject-646ed.appspot.com",
+        messagingSenderId: "463097341157",
+        appId: "1:463097341157:web:789479a051d00de852200c"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getDatabase(app);
+
+
+    // DOM Elements
+    const findButton = document.getElementById('findbtn');
+    const aadhaarInput = document.getElementById('patientaadhar');
+    const nameInput = document.getElementById('patientname');
+    const idInput = document.getElementById('dischargePatientId');
+    const patientTableBody = document.getElementById('patientTableBody');
+
+    // Reference to patients data
+    const patientRef = ref(db, 'patients');
+
+
+    // this will display the no of remaining beds and remaining beds
+
+    const totalBedsElement = document.getElementById('totalBeds');
+    const remainingBedsElement = document.getElementById('remainingBeds');
+
+    function loadBedData2() {
+        const bedsRef = ref(db, 'beds');
+        get(bedsRef).then((snapshot) => {
+            if (snapshot.exists()) {
+                const bedData = snapshot.val();
+                console.log("Bed Data Retrieved:", bedData);
+                updateBedDisplay1(bedData);
+            } else {
+                console.error("No bed data found.");
+            }
+        }).catch((error) => {
+            console.error("Error loading bed data:", error);
+        });
+    }
+
+    function updateBedDisplay1(bedData) {
+        let totalBeds = 0, remainingBeds = 0;
+        for (const type in bedData) {
+            totalBeds += bedData[type].total;       // Sum total beds
+            remainingBeds += bedData[type].remaining; // Sum remaining beds
+        }
+        totalBedsElement.textContent = totalBeds;       // Update total beds display
+        remainingBedsElement.textContent = remainingBeds; // Update remaining beds display
+    }
+
+    window.addEventListener('DOMContentLoaded', loadBedData2); // Load bed data when the page is loaded
+
+
+    // Populate table with patient data
+    const loadPatients = () => {
+        patientTableBody.innerHTML = ''; // Clear table before loading
+        get(patientRef).then((snapshot) => {
+            if (snapshot.exists()) {
+                snapshot.forEach((childSnapshot) => {
+                    const patient = childSnapshot.val();
+                    const row = document.createElement('tr');
+                    row.id = patient.id; // Set row ID to match patient ID
+                    row.innerHTML = `
+                        <td>${patient.id}</td>
+                        <td>${patient.aadhar}</td>
+                        <td>${patient.name}</td>
+                        <td>${patient.age}</td>
+                        <td>${patient.gender}</td>
+                        <td>${patient.phone}</td>
+                        <td>${patient.address}</td>
+                        <td>${patient.bedType}</td>
+                        <td>${patient.checkinTime || ""}</td>
+                    `;
+                    patientTableBody.appendChild(row);
+                });
+            } else {
+                console.log("No patient data found.");
+            }
+        }).catch((error) => {
+            console.error("Error retrieving data:", error);
+        });
+    };
+
+    // Load patients on page load
+    loadPatients();
+
+
+    // Find patient by Aadhaar number
+    findButton.addEventListener('click', async () => {
+        const aadhaar = aadhaarInput.value.trim();
+        if (!aadhaar) {
+            alert('Please enter an Aadhaar number');
+            return;
+        }
+
+        try {
+            const snapshot = await get(patientRef);
+            if (snapshot.exists()) {
+                let patientFound = false;
+                snapshot.forEach((childSnapshot) => {
+                    const data = childSnapshot.val();
+                    if (data.aadhar === aadhaar) {
+                        nameInput.value = data.name;
+                        idInput.value = data.id;
+                        patientFound = true;
+                    }
+                });
+
+                if (!patientFound) alert('Patient not found!');
+            } else {
+                alert('No patient data found.');
+            }
+        } catch (error) {
+            console.error('Error retrieving patient:', error);
+        }
+    });
+
+
+
+
+
+
+
+    // Discharge patient logic
+    document.getElementById('dischargeBtn').addEventListener('click', () => {
+        const patientIdOrAadhar = document.getElementById('dischargePatientId').value.trim();
+        if (!patientIdOrAadhar) {
+            alert("Please enter a valid Patient ID or Aadhaar number.");
+            return;
+        }
+        dischargePatient(patientIdOrAadhar);
+    });
+    // Main function to discharge the patient
+    function dischargePatient(patientIdOrAadhar) {
+        const patientsRef = ref(db, 'patients');
+
+        get(patientsRef).then((snapshot) => {
+            if (snapshot.exists()) {
+                let patientToDischarge = null;
+
+                // Find the patient by ID or Aadhaar
+                snapshot.forEach((childSnapshot) => {
+                    const patient = childSnapshot.val();
+                    if (patient.id == patientIdOrAadhar || patient.aadhar == patientIdOrAadhar) {
+                        patientToDischarge = patient;
+                    }
+                });
+
+                if (patientToDischarge) {
+                    console.log(`Patient found: ${JSON.stringify(patientToDischarge)}`);
+
+                    // Update bed availability and remove patient
+                    updateBedAvailability(patientToDischarge)
+                        .then(() => removePatientData(patientToDischarge))
+                        .then(() => {
+                            alert("Patient discharged successfully!");
+                            document.getElementById('dischargePatientId').value = ""; // Reset input
+                            loadBedData(); // Reload the bed data
+                        })
+                        .catch((error) => console.error("Error during discharge:", error));
+                } else {
+                    alert("Patient not found.");
+                }
+            } else {
+                console.error("No patient data found.");
+            }
+        }).catch((error) => {
+            console.error("Error fetching patients:", error);
+        });
+    }
+
+    // Update the bed availability by incrementing the count
+    function updateBedAvailability(patient) {
+        const bedRef = ref(db, `beds/${patient.bedType}/remaining`);
+
+        console.log(`Updating bed availability for bed type: ${patient.bedType}`);
+
+        return get(bedRef).then((snapshot) => {
+            if (snapshot.exists()) {
+                const remainingBeds = snapshot.val() || 0; // Handle undefined case
+                console.log(`Current remaining beds: ${remainingBeds}`);
+                return set(bedRef, remainingBeds + 1); // Increment remaining beds
+            } else {
+                console.warn(`Bed type '${patient.bedType}' not found in database.`);
+                return Promise.reject(`Bed type '${patient.bedType}' not found.`);
+            }
+        }).then(() => {
+            console.log("Bed availability updated successfully.");
+        }).catch((error) => {
+            console.error("Error updating bed availability:", error);
+        });
+    }
+
+    // Remove patient data from the database
+    function removePatientData(patient) {
+        const patientRef = ref(db, `patients/${patient.id}`);
+        const bedDataRef = ref(db, `beddata/${patient.bedId}`);
+
+        console.log(`Removing patient data for patient ID: ${patient.id}`);
+
+        return Promise.all([
+            remove(patientRef),
+            remove(bedDataRef)
+        ]).then(() => {
+            console.log("Patient data removed successfully.");
+        }).catch((error) => {
+            console.error("Error removing patient data:", error);
+        });
+    }
+    // Function to load bed data from Firebase
+    function loadBedData() {
+        const bedsRef = ref(db, 'beds');
+        console.log("Attempting to load bed data...");
+
+        get(bedsRef)
+            .then((snapshot) => {
+                if (snapshot.exists()) {
+                    const bedData = snapshot.val();
+                    console.log("Bed data retrieved:", bedData);
+                    updateBedDisplay(bedData); // Pass the data to the display function
+                } else {
+                    console.warn("No bed data found.");
+                    updateBedDisplay({}); // Pass empty object to reset display to 0
+                }
+            })
+            .catch((error) => {
+                console.error("Error loading bed data:", error);
+                updateBedDisplay({}); // Ensure display is reset on error
+            });
+    }
+
+    // Function to update the bed display with the fetched data
+    function updateBedDisplay(bedData) {
+        let totalBeds = 0;
+        let remainingBeds = 0;
+
+        // Iterate over bed types to calculate totals
+        for (const type in bedData) {
+            const bedInfo = bedData[type];
+
+            // Log to see what data we are working with
+            console.log(`Processing Bed Type: ${type}`, bedInfo);
+
+            // Parse total and remaining values with proper fallback to avoid NaN
+            const total = Number(bedInfo?.total) || 0;
+            const remaining = Number(bedInfo?.remaining) || 0;
+
+            totalBeds += total;
+            remainingBeds += remaining;
+        }
+
+        console.log(`Final Total Beds: ${totalBeds}, Remaining Beds: ${remainingBeds}`);
+
+        // Update the DOM elements, falling back to 0 if values are not valid
+        document.getElementById('totalBeds').textContent = totalBeds;
+        document.getElementById('remainingBeds').textContent = remainingBeds;
+    }
+
+    // Load bed data when the page finishes loading
+    window.addEventListener('DOMContentLoaded', loadBedData);
+
+
+</script>
+
+
+
+
+
+</html>
