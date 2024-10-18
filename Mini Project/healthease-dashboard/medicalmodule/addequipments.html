@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="../assets/img/logo.png" type="image/x-icon">
+    <title>Add Equipments </title>
+    <!--Font awesome stylesheet-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+        integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- bootstrap stylesheet -->
+    <link rel="stylesheet" href="../assets/css/customizeBootstrap.css">
+    <!-- css stylesheet -->
+    <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+
+<body class="body-bg">
+
+    <!-- main body  -->
+
+    <!-- preloader  -->
+    <div id='preloader'>
+        <svg id='loader-1' height='210' width='550' xmlns='http://www.w3.org/2000/svg'
+            xmlns:xlink='http://www.w3.org/1999/xlink'>
+            <path id='loader-2' stroke='#DE6262' fill='none' stroke-width='2' stroke-linejoin='round'
+                d='M0,90L250,90Q257,60 262,87T267,95 270,88 273,92t6,35 7,-60T290,127 297,107s2,-11 10,-10 1,1 8,-10T319,95c6,4 8,-6 10,-17s2,10 9,11h210' />
+        </svg>
+    </div>
+
+    <!-- sidebar start -->
+    <div class="sidebar">
+        <div class="sidebar-wrapper">
+            <div>
+                <i class="fa-solid fa-x hide-menubar" id="hide-menubar"></i>
+                <div class="p-xl-20 p-10 ">
+                    <div class="logo pb-20">
+                        <a class="d-flex align-items-center" href="../dashboard.html">
+                            <img src="../assets/img/logo.png" alt="logo">
+                            <img class="ms-10 show-item lp-2" src="../assets/img/logo-body.png" alt="logo">
+                        </a>
+                    </div>
+                    <div class="py-20 bb-2 bt-1">
+                        <a class="sidebar-user" href="javascript:void(0)">
+                            <img class="rounded-circle" src="../assets/img/doctor.png" alt="admin">
+                            <span class="para-1b show-item ms-10">Mr. Doctor</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="side-menu">
+                    <ul>
+                        <li>
+                            <a href="medidash.php">
+                                <i class="fa-solid fa-gauge-high"></i>
+                                <span class="show-item"> Dashboard </span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="device.html">
+                                <i class="fa-solid fa-laptop-medical"></i>
+                                <span class="show-item"> Device </span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="equipments.html">
+                                <i class="fa-solid fa-bed-pulse"></i>
+                                <span class="show-item"> Equipments </span>
+                            </a>
+                        </li>
+                        <li class="active">
+                            <a href="#">
+                                <i class="fa-solid fa-bed-pulse"></i>
+                                <span class="show-item"> Add-Inventory </span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="editequipments.html">
+                                <i class="fa-solid fa-bed-pulse"></i>
+                                <span class="show-item"> Edit-Inventory </span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="remove.html">
+                                <i class="fa-solid fa-file-prescription"></i>
+                                <span class="show-item"> remove-INV </span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- sidebar end  -->
+
+    <!-- main content & top header start  -->
+    <main class="content-wrapper">
+
+        <!-- header section start  -->
+        <header>
+            <div class="d-flex align-items-center gap-xl-30 gap-3">
+
+                <button class="toggle-menu btn">
+                    <i class="fa-solid fa-bars-staggered"></i>
+                </button>
+
+                <a href="#" target="_blank">
+                    <i class="fa-solid fa-globe me-10"></i>
+                    <span class="fs-base header-item-hide">Go to website</span>
+                </a>
+            </div>
+
+            <div class="d-flex align-items-center gap-sm-4 gap-3">
+
+                <div class="health-ease">
+                    <i class="fa-regular fa-hospital me-xl-10 he-icon"></i>
+                    E-Hospital
+                </div>
+
+
+                <div class="account">
+                    <img class="me-xl-10" src="../assets/img/patient.png" alt="patient">
+                    Mr. Doctor
+                </div>
+
+                <div class="language ">
+                    <img class="lang-flag header-item-hide" src="../assets/img/flag.png" alt="flag">
+                    IN
+                </div>
+            </div>
+        </header>
+        <!-- header section end  -->
+
+        <!-- content section start   -->
+        <div class="main-content">
+            <!-- main content start -->
+            <div>
+                <div class="page-title justify-content-end">
+                    <!-- <h3>Add Patient</h3> -->
+                    <ul class="d-flex align-items-center gap-20">
+                        <li class="bc-item"><a class="para-1b" href="../dashboard.html">Dashboard</a></li>
+                        <li class="bc-item">Add Equipments</li>
+                    </ul>
+                </div>
+
+                <div class="bgnc-10 br-sm p-sm-30 p-10">
+                    <span class="heading-five mb-sm-30 mb-3">Add Equipments</span>
+                    <!-- Include Firebase libraries -->
+
+                    <form id="equipmentForm">
+                        <div class="row gy-20">
+                            <div class="col-lg-6">
+                                <div class="mb-20">
+                                    <label class="mb-10 fw-semibold">Name <span class="tsc-1">*</span></label>
+                                    <div class="form-input-box">
+                                        <i class="fa-solid fa-user-nurse form-icon"></i>
+                                        <input type="text" placeholder="Name" id="Patientnme" required>
+                                    </div>
+                                </div>
+                                <div class="mb-20">
+                                    <label class="mb-10 fw-semibold">Warranty Date <span class="tsc-1">*</span></label>
+                                    <div class="form-input-box">
+                                        <i class="fa-solid fa-key form-icon"></i>
+                                        <input type="date" id="warrantyDate" required>
+                                    </div>
+                                </div>
+                                <div class="mb-20">
+                                    <label class="mb-10 fw-semibold">Quantity</label>
+                                    <div class="form-input-box">
+                                        <i class="fa-solid fa-restroom form-icon"></i>
+                                        <input type="number" placeholder="Quantity" id="quantity" required>
+                                    </div>
+                                </div>
+                                <div class="mb-20">
+                                    <label class="mb-10 fw-semibold">MFG Date</label>
+                                    <div class="form-input-box">
+                                        <i class="fa-solid fa-bed form-icon"></i>
+                                        <input type="date" id="mfgDate" required>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-6">
+                                <div class="mb-20">
+                                    <label class="mb-10 fw-semibold">Purchase Date <span class="tsc-1">*</span></label>
+                                    <div class="form-input-box">
+                                        <i class="fa-regular fa-envelope form-icon"></i>
+                                        <input type="date" id="purchaseDate" required>
+                                    </div>
+                                </div>
+                                <div class="mb-20">
+                                    <label class="mb-10 fw-semibold">Serial No</label>
+                                    <div class="form-input-box">
+                                        <i class="fa-solid fa-phone-volume form-icon"></i>
+                                        <input type="text" id="serialNo" placeholder="Serial Number">
+                                    </div>
+                                </div>
+                                <div class="mb-20">
+                                    <label class="mb-10 fw-semibold">Department</label>
+                                    <div class="form-input-box">
+                                        <i class="fa-solid fa-heart-pulse form-icon"></i>
+                                        <select id="department" class="wide">
+                                            <option value="0">Select</option>
+                                            <option value="Radiology">Radiology</option>
+                                            <option value="Surgery">Surgery</option>
+                                            <option value="OPD">OPD</option>
+                                            <option value="Operating Room">Operating Room</option>
+                                            <option value="Laboratory">Laboratory</option>
+
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="mb-20">
+                                    <label class="mb-10 fw-semibold">Cost <span class="tsc-1">*</span></label>
+                                    <div class="form-input-box">
+                                        <i class="fa fa-id-card form-icon" aria-hidden="true"></i>
+                                        <input type="number" placeholder="Enter Equipment Cost" id="cost" required>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn-2 para-1b fw-bold">Submit</button>
+
+                    </form>
+                </div>
+
+
+
+            </div>
+            <!-- main content end -->
+
+            <!-- footer start  -->
+            <footer>
+                <div class="container-fluid">
+                    <span class="para-1b fs-base text-center text-sm-start d-block ">
+                        Copyright © <span class="currentYear"></span> HealthEase Medical. All rights reserved.
+                    </span>
+                </div>
+            </footer>
+            <!-- footer end  -->
+        </div>
+        <!-- content section end   -->
+    </main>
+    <!-- main content & top header end  -->
+
+
+    <!-- jquery -->
+    <script src="../assets/js/plugin/jquery-3.7.0.min.js"></script>
+    <!-- bootstrap js  -->
+    <script src="../assets/js/plugin/bootstrap.min.js"></script>
+    <!-- nice select  -->
+    <script src="../assets/js/plugin/jquery.nice-select.min.js"></script>
+    <!-- chart js  -->
+    <script src="../assets/js/plugin/cdn.jsdelivr.net_npm_chart.js"></script>
+    <!-- plugin customize js  -->
+    <script src="../assets/js/pluginCustomization.js"></script>
+    <!-- main js  -->
+    <script src="../assets/js/main.js"></script>
+</body>
+
+
+<script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js";
+    import { getDatabase, ref, set, get, child } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-database.js";
+
+    // Firebase configuration
+    const firebaseConfig = {
+        apiKey: "AIzaSyDox-bH1UMvQvvzYhlx2T9R6felaN_O_sM",
+        authDomain: "miniproject-646ed.firebaseapp.com",
+        projectId: "miniproject-646ed",
+        storageBucket: "miniproject-646ed.appspot.com",
+        messagingSenderId: "463097341157",
+        appId: "1:463097341157:web:789479a051d00de852200c"
+    };
+
+    // Initialize Firebase and Realtime Database
+    const app = initializeApp(firebaseConfig);
+    const db = getDatabase(app);
+
+    // Function to generate a new unique equipment ID
+    async function generateEquipmentID() {
+        const dbRef = ref(db);
+        const snapshot = await get(child(dbRef, "medimodule"));
+
+        if (!snapshot.exists()) {
+            return "EQP10"; // Start with EQP10 if no data exists
+        }
+
+        // Get the last ID and increment it
+        const data = snapshot.val();
+        const ids = Object.keys(data).map(id => parseInt(id.replace('EQP', '')));
+        const newIDNumber = Math.max(...ids) + 1;
+        return `EQP${newIDNumber}`;
+    }
+
+    // Handle form submission
+    document.getElementById('equipmentForm').addEventListener('submit', async (e) => {
+        e.preventDefault(); // Prevent page reload
+
+        // Retrieve form values
+        const name = document.getElementById('Patientnme').value;
+        const warrantyDate = document.getElementById('warrantyDate').value;
+        const quantity = document.getElementById('quantity').value;
+        const mfgDate = document.getElementById('mfgDate').value;
+        const purchaseDate = document.getElementById('purchaseDate').value;
+        const serialNo = document.getElementById('serialNo').value;
+        const department = document.getElementById('department').value;
+        const cost = document.getElementById('cost').value;
+
+        try {
+            // Generate a new equipment ID
+            const equipmentID = await generateEquipmentID();
+
+            // Save data to Firebase Realtime Database
+            await set(ref(db, `medimodule/${equipmentID}`), {
+                id: equipmentID,
+                name: name,
+                warrantyDate: warrantyDate,
+                quantity: parseInt(quantity),
+                mfgDate: mfgDate,
+                purchaseDate: purchaseDate,
+                serialNo: serialNo,
+                department: department,
+                cost: parseFloat(cost)
+            });
+
+            alert('Data added successfully!');
+            document.getElementById('equipmentForm').reset();
+        } catch (error) {
+            console.error('Error adding data: ', error);
+            alert('Failed to add data. Please try again.');
+        }
+    });
+
+
+
+</script>
+
+
+</html>

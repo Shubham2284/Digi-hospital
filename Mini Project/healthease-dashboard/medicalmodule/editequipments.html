@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="../assets/img/logo.png" type="image/x-icon">
+    <title>Edit Equipments </title>
+    <!--Font awesome stylesheet-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+        integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- bootstrap stylesheet -->
+    <link rel="stylesheet" href="../assets/css/customizeBootstrap.css">
+    <!-- css stylesheet -->
+    <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+
+<body class="body-bg">
+
+    <!-- main body  -->
+
+    <!-- preloader  -->
+    <div id='preloader'>
+        <svg id='loader-1' height='210' width='550' xmlns='http://www.w3.org/2000/svg'
+            xmlns:xlink='http://www.w3.org/1999/xlink'>
+            <path id='loader-2' stroke='#DE6262' fill='none' stroke-width='2' stroke-linejoin='round'
+                d='M0,90L250,90Q257,60 262,87T267,95 270,88 273,92t6,35 7,-60T290,127 297,107s2,-11 10,-10 1,1 8,-10T319,95c6,4 8,-6 10,-17s2,10 9,11h210' />
+        </svg>
+    </div>
+
+    <!-- sidebar start -->
+    <div class="sidebar">
+        <div class="sidebar-wrapper">
+            <div>
+                <i class="fa-solid fa-x hide-menubar" id="hide-menubar"></i>
+                <div class="p-xl-20 p-10 ">
+                    <div class="logo pb-20">
+                        <a class="d-flex align-items-center" href="../dashboard.html">
+                            <img src="../assets/img/logo.png" alt="logo">
+                            <img class="ms-10 show-item lp-2" src="../assets/img/logo-body.png" alt="logo">
+                        </a>
+                    </div>
+                    <div class="py-20 bb-2 bt-1">
+                        <a class="sidebar-user" href="javascript:void(0)">
+                            <img class="rounded-circle" src="../assets/img/doctor.png" alt="admin">
+                            <span class="para-1b show-item ms-10">Mr. Doctor</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="side-menu">
+                    <ul>
+                        <li>
+                            <a href="medidash.php">
+                                <i class="fa-solid fa-gauge-high"></i>
+                                <span class="show-item"> Dashboard </span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="device.html">
+                                <i class="fa-solid fa-laptop-medical"></i>
+                                <span class="show-item"> Device </span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="equipments.html">
+                                <i class="fa-solid fa-bed-pulse"></i>
+                                <span class="show-item"> Equipments </span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="addequipments.html">
+                                <i class="fa-solid fa-bed-pulse"></i>
+                                <span class="show-item"> Add-Inventory </span>
+                            </a>
+                        </li>
+                        <li class="active">
+                            <a href="#">
+                                <i class="fa-solid fa-bed-pulse"></i>
+                                <span class="show-item"> Edit-Inventory </span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="remove.html">
+                                <i class="fa-solid fa-file-prescription"></i>
+                                <span class="show-item"> remove-INV </span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- sidebar end  -->
+
+    <!-- main content & top header start  -->
+    <main class="content-wrapper">
+
+        <!-- header section start  -->
+        <header>
+            <div class="d-flex align-items-center gap-xl-30 gap-3">
+
+                <button class="toggle-menu btn">
+                    <i class="fa-solid fa-bars-staggered"></i>
+                </button>
+
+                <a href="#" target="_blank">
+                    <i class="fa-solid fa-globe me-10"></i>
+                    <span class="fs-base header-item-hide">Go to website</span>
+                </a>
+            </div>
+
+            <div class="d-flex align-items-center gap-sm-4 gap-3">
+
+                <div class="health-ease">
+                    <i class="fa-regular fa-hospital me-xl-10 he-icon"></i>
+                    E-Hospital
+                </div>
+
+
+                <div class="account">
+                    <img class="me-xl-10" src="../assets/img/patient.png" alt="patient">
+                    Mr. Doctor
+                </div>
+
+                <div class="language ">
+                    <img class="lang-flag header-item-hide" src="../assets/img/flag.png" alt="flag">
+                    IN
+                </div>
+            </div>
+        </header>
+        <!-- header section end  -->
+
+        <!-- content section start   -->
+        <div class="main-content">
+            <!-- main content start -->
+            <div>
+                <div class="page-title justify-content-end">
+                    <!-- <h3>Add Patient</h3> -->
+                    <ul class="d-flex align-items-center gap-20">
+                        <li class="bc-item"><a class="para-1b" href="../dashboard.html">Dashboard</a></li>
+                        <li class="bc-item">Edit Equipments</li>
+                    </ul>
+                </div>
+
+                <div class="bgnc-10 br-sm p-sm-30 p-10">
+                    <span class="heading-five mb-sm-30 mb-3">Edit Equipments</span>
+                    <form action="#">
+                        <div class="row gy-20">
+                            <div class="col-lg-6">
+
+                                <div class="mb-20">
+                                    <label class="mb-10 fw-semibold"> Equpment ID <span class="tsc-1">*</span></label>
+                                    <div class="form-input-box">
+                                        <i class="fa-solid fa-user-nurse form-icon"></i>
+                                        <input type="text" placeholder="ID" id="equpid" required>
+                                    </div>
+                                </div>
+                                <div class="mb-20">
+                                    <label class="mb-10 fw-semibold"> Name <span class="tsc-1">*</span></label>
+                                    <div class="form-input-box">
+                                        <i class="fa-solid fa-user-nurse form-icon"></i>
+                                        <input type="text" placeholder="Name" id="EqupName" required>
+                                    </div>
+                                </div>
+
+                                <div class="mb-20">
+                                    <label class="mb-10 fw-semibold">Warranty Date <span class="tsc-1">*</span></label>
+                                    <div class="form-input-box">
+                                        <i class="fa-solid fa-key form-icon"></i>
+                                        <input type="date" id="warrantydate" required>
+                                    </div>
+                                </div>
+
+                                <div class="mb-20">
+                                    <label class="mb-10 fw-semibold">Quantity</label>
+                                    <div class="form-input-box">
+                                        <i class="fa-solid fa-restroom form-icon"></i>
+                                        <input type="number" placeholder="quantity" id="quantity" required>
+                                    </div>
+                                </div>
+
+                                <div class="mb-20">
+                                    <label class="mb-10 fw-semibold">MFG Date</label>
+                                    <div class="form-input-box">
+                                        <i class="fa-solid fa-bed form-icon"></i>
+                                        <input type="date" id="mfgdate" required>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div class="col-lg-6">
+                                <div class="mb-20">
+                                    <label class="mb-10 fw-semibold">Purchase Date <span class="tsc-1">*</span></label>
+                                    <div class="form-input-box">
+                                        <i class="fa-regular fa-envelope form-icon"></i>
+                                        <input type="date" placeholder="Email" id="purchasedate" required>
+                                    </div>
+                                </div>
+
+                                <div class="mb-20">
+                                    <label class="mb-10 fw-semibold">Serial No</label>
+                                    <div class="form-input-box">
+                                        <i class="fa-solid fa-phone-volume form-icon"></i>
+                                        <input type="text" id="serialno" placeholder="Number">
+                                    </div>
+                                </div>
+                                <div class="mb-20">
+                                    <label class="mb-10 fw-semibold">Department</label>
+                                    <div class="form-input-box">
+                                        <i class="fa-solid fa-heart-pulse form-icon"></i>
+                                        <!--  <select id="Blood-group" class="wide">
+                                            <option value="0">Select</option>
+                                            <option value="A+">Radiology</option>
+                                            <option value="A-">Surgery</option>
+                                        </select> -->
+                                        <input type="text" id="department1" placeholder="department">
+                                    </div>
+                                </div>
+
+
+
+
+                                <div class="mb-20">
+                                    <label class="mb-10 fw-semibold">Coast <span class="tsc-1">*</span></label>
+                                    <div class="form-input-box">
+                                        <i class="fa fa-id-card form-icon" aria-hidden="true"></i>
+                                        <input type="number" placeholder="Enter Patients Aadhar number" id="coastvalue"
+                                            required>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </form>
+                </div>
+
+                <div class="d-flex align-items-center gap-sm-4 gap-3 mt-sm-40 mt-4">
+                    <button class="btn-2 para-1b fw-bold" id="retrieveBtn">Retrieve</button>
+                    <button class="btn-2 para-1b fw-bold" id="submitBtn">Submit</button>
+                    <button class="btn-1 para-1b fw-bold">Cancel</button>
+                </div>
+            </div>
+
+
+
+        </div>
+        <!-- main content end -->
+
+        <!-- footer start  -->
+        <footer>
+            <div class="container-fluid">
+                <span class="para-1b fs-base text-center text-sm-start d-block ">
+                    Copyright © <span class="currentYear"></span> HealthEase Medical. All rights reserved.
+                </span>
+            </div>
+        </footer>
+        <!-- footer end  -->
+        </div>
+        <!-- content section end   -->
+    </main>
+    <!-- main content & top header end  -->
+
+
+    <!-- jquery -->
+    <script src="../assets/js/plugin/jquery-3.7.0.min.js"></script>
+    <!-- bootstrap js  -->
+    <script src="../assets/js/plugin/bootstrap.min.js"></script>
+    <!-- nice select  -->
+    <script src="../assets/js/plugin/jquery.nice-select.min.js"></script>
+    <!-- chart js  -->
+    <script src="../assets/js/plugin/cdn.jsdelivr.net_npm_chart.js"></script>
+    <!-- plugin customize js  -->
+    <script src="../assets/js/pluginCustomization.js"></script>
+    <!-- main js  -->
+    <script src="../assets/js/main.js"></script>
+</body>
+
+<script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js";
+    import { getDatabase, ref, get, child, update } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-database.js";
+
+    // Firebase configuration
+    const firebaseConfig = {
+        apiKey: "AIzaSyDox-bH1UMvQvvzYhlx2T9R6felaN_O_sM",
+        authDomain: "miniproject-646ed.firebaseapp.com",
+        projectId: "miniproject-646ed",
+        storageBucket: "miniproject-646ed.appspot.com",
+        messagingSenderId: "463097341157",
+        appId: "1:463097341157:web:789479a051d00de852200c"
+    };
+
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+    const db = getDatabase(app);
+
+    // Retrieve data from Firebase on "Retrieve" button click
+    document.getElementById("retrieveBtn").addEventListener("click", async function () {
+        const eqpID = document.getElementById("equpid").value;
+        if (eqpID) {
+            await retrieveEquipmentData(eqpID);
+        } else {
+            alert("Please enter Equipment ID.");
+        }
+    });
+
+    // Function to retrieve equipment data
+    async function retrieveEquipmentData(eqpID) {
+        const dbRef = ref(db);
+        try {
+            const snapshot = await get(child(dbRef, `medimodule/${eqpID}`));
+            if (snapshot.exists()) {
+                const data = snapshot.val();
+                populateForm(data);
+            } else {
+                alert("No equipment found with this ID.");
+            }
+        } catch (error) {
+            console.error("Error fetching data:", error);
+        }
+    }
+
+    // Populate the form with retrieved data
+    function populateForm(data) {
+        document.getElementById("EqupName").value = data.name || "";
+        document.getElementById("warrantydate").value = data.warrantyDate || "";
+        document.getElementById("quantity").value = data.quantity || "";
+        document.getElementById("mfgdate").value = data.mfgDate || "";
+        document.getElementById("purchasedate").value = data.purchaseDate || "";
+        document.getElementById("serialno").value = data.serialNo || "";
+        document.getElementById("department1").value = data.department || "";
+        document.getElementById("coastvalue").value = data.cost || "";
+    }
+
+    // Update Firebase data on "Submit" button click
+    document.getElementById("submitBtn").addEventListener("click", async function () {
+        const eqpID = document.getElementById("equpid").value;
+        if (eqpID) {
+            await updateEquipmentData(eqpID);
+        } else {
+            alert("Please enter Equipment ID.");
+        }
+    });
+
+    // Function to update equipment data in Firebase
+    async function updateEquipmentData(eqpID) {
+        const updates = {
+            name: document.getElementById("EqupName").value,
+            warrantyDate: document.getElementById("warrantydate").value,
+            quantity: document.getElementById("quantity").value,
+            mfgDate: document.getElementById("mfgdate").value,
+            purchaseDate: document.getElementById("purchasedate").value,
+            serialNo: document.getElementById("serialno").value,
+            department: document.getElementById("department1").value,
+            cost: document.getElementById("coastvalue").value,
+        };
+
+        const dbRef = ref(db, `medimodule/${eqpID}`);
+        try {
+            await update(dbRef, updates);
+            alert("Equipment data updated successfully.");
+        } catch (error) {
+            console.error("Error updating data:", error);
+        }
+    }
+
+</script>
+
+
+</html>
