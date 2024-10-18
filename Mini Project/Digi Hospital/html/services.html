@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Services</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="../css/services.css">
+</head>
+<body>
+  <!--Navigation bar do not disturb this area of the code -->
+  <nav>
+    <div class="logo">
+      <img src="../media/images/logo.png" alt="#">
+      <h2>DIGI-HOSPITAL</h2>
+    </div>
+        
+    <ul class="sidebar">
+      <li onclick="hideSidebar()"><a href="#"><svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e8eaed"><path d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z"/></svg></a></li>
+      <li><a href="../index.html">Home</a></li>
+      <li><a href="#">Services</a></li>
+      <li><a href="about_us.html">About US</a></li>
+      <li><a href="contact_us.html">Contact US</a></li>
+    </ul>
+    <ul>
+      <li class="hideOnMobile" ><a href="../index.html">Home</a></li>
+      <li class="hideOnMobile" ><a href="#">Services</a></li>
+      <li class="hideOnMobile" ><a href="about_us.html">About US</a></li>
+      <li class="hideOnMobile" ><a href="contact_us.html">Contact US</a></li>
+      <li class="menu-button" onclick="showSidebar()"><a href="#"><svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e8eaed"><path d="M120-240v-80h720v80H120Zm0-200v-80h720v80H120Zm0-200v-80h720v80H120Z"/></svg></a></li>
+    </ul>
+  </nav>
+  <!--The Second Stripline-->
+  <div class="container1">
+    <div class="subcon1">
+      <img src="../media/images/indianembelem.png" alt="#" width="50vh" height="70vh" style="margin-top: 10px; margin-bottom: 10px;">
+        <div class="text-container">
+          <h2>Health & Family Welfare</h2>
+          <h3>Government of NCT of Delhi</h3>
+        </div>
+    </div>
+        
+    <ul>
+      <li><img src="../media/images/lok-sabha-election1.jpg" width="80vh" height="60vh" alt="LOK SABHA ELECTION 2024" loading="lazy">
+      </li>
+      <li><img src="../media/images/india-flag-1.jpg" width="80vh" height="60vh" alt="Indian-flag" loading="lazy">
+      </li>
+      <li><img src="../media/images/amrit-mahotsav.jpg" width="80vh" height="60vh" alt="Azadi ka amrtit-mahotasav" loading="lazy">
+      </li>
+    </ul>   
+  </div>
+
+
+  <!-- Banner Section with Text and Gradient Overlay -->
+  <div class="banner-container">
+    <img src="../media/images/department_of_health_family_welfare_web_banner.jpg" alt="Health and Family Welfare Banner" class="banner-image">
+    <div class="gradient-overlay">
+    </div>
+    <div class="banner-text">
+      <h1>Welcome to</h1>
+      <h2>The Department of Health & Family Welfare</h2>
+      <p>Health & Family Welfare Department of Govt. of NCT of Delhi has tremendous health care responsibilities. The department caters to health needs of nearly 160 lakh population of the ever-growing metropolis and also has to share the burden of migratory as well as floating population from neighbouring states which constitute nearly 33% of total intake at major hospitals in Delhi. The Department of Health & Family Welfare of Government of NCT of Delhi is headed by the Principal Secretary. The department plays a significant role and is committed to provide health care facilities to the people of Delhi..</p>
+    </div>
+  </div>
+
+
+
+<!--This is the place where actual services pages coding goes-->
+
+  <section class="services">
+    <h2>Our Services</h2>
+    <div class="service-container">
+      <div class="service-card">
+          <a href="bedvacency.html">
+              <img src="../media/images/icu-icon_1.png" alt="ICU Beds Availability">
+              <div class="service-info">
+                  <h3>Dashboard of ICU Beds Availability</h3>
+              </div>
+          </a>
+      </div>
+      <div class="service-card">
+          <a href="#">
+              <img src="../media/images/health_facilities_portal_logo_2.jpg" alt="Health Facilities in Delhi">
+              <div class="service-info">
+                  <h3>Health Facilities in Delhi, Geo Portal Link</h3>
+              </div>
+          </a>
+      </div>
+      <div class="service-card">
+          <a href="#">    
+              <img src="../media/images/hmod_1_1.jpg" alt="Map of Govt. Health facilities in Delhi">
+              <div class="service-info">
+                  <h3>Map of Govt. Health facilities in Delhi</h3>
+              </div>
+          </a>    
+      </div> 
+    </div>
+    <button class="view-all">View All</button>
+  </section>
+
+
+  <!-- Scroll to top button with FontAwesome icon -->
+  <button id="scrollToTopBtn" title="Go to top"><i class="fa-solid fa-circle-up"></i></button>
+
+  <!--Footer HTML coding goes here-->
+  <footer>
+    <div class="footer-container">
+      <div class="footer-section-about">
+        <h2>About Us</h2>
+        <p>We are dedicated to providing comprehensive hospital management solutions, connecting patients and hospitals for a seamless healthcare experience.</p>
+      </div>
+  
+      <div class="footer-section-links">
+        <h2>Quick Links</h2>
+        <ul>
+          <li><a href="../index.html">Home</a></li>
+          <li><a href="#">Services</a></li>
+          <li><a href="about_us.html">About US</a></li>
+          <li><a href="contact_us.html">Contact US</a></li>
+        </ul>
+      </div>
+  
+      <div class="footer-section-contact">
+        <h2>Contact Us</h2>
+        <ul>
+          <li><i class="fas fa-phone-alt"></i> +123 456 7890</li>
+          <li><i class="fas fa-envelope"></i> contact@hospital.com</li>
+          <li><i class="fas fa-map-marker-alt"></i> 123 Health Street, City, Country</li>
+        </ul>
+      </div>
+    </div>
+    
+    <div class="footer-bottom">
+      <p>&copy; 2024 Hospital Management System | All rights reserved.</p>
+    </div>
+  </footer>
+
+</body>
+<script src="../javascript/nav.js"></script>
+</html>
